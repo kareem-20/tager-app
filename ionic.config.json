@@ -1,0 +1,7 @@
+{
+  "name": "tager-app",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
