@@ -1,0 +1,29 @@
+ion-tab-bar {
+  padding-bottom: 10px;
+  padding-top: 3px;
+  border-top: none;
+  box-shadow: 0 -1px 8px 0 #11222e1a;
+  ion-tab-button {
+    ion-img {
+      //   width: 32px;
+      //   height: 32px;
+    }
+    ion-label {
+      // @include text(var(--light-text),12,'regular',22);
+      color: var(--light-text);
+      font-size: 12px;
+      line-height: 22px;
+      &.active {
+        font-family: "bold";
+        color: var(--dark-text);
+      }
+    }
+    ion-badge {
+      // @include text(white,9,'bold',15);
+      font-weight: bold;
+      right: 50%;
+      top: 1px;
+      transform: translateX(14px);
+    }
+  }
+}

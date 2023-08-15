@@ -1,0 +1,13 @@
+<svg id="home-house.4" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.601" y1="0.202" x2="0.472" y2="1.325" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#f5b73c"/>
+      <stop offset="0.326" stop-color="#e9a53a"/>
+      <stop offset="0.569" stop-color="#e18755"/>
+      <stop offset="1" stop-color="#de415c"/>
+    </linearGradient>
+  </defs>
+  <path id="Path_60246" data-name="Path 60246" d="M843.82,932.461h-5.131v-5.1l-2.2-2.2h-1.352l-2.2,2.2v5.1h-5.074v-9.424l7.949-7.949,7.949,7.949Z" transform="translate(-824 -912)" fill="url(#linear-gradient)"/>
+  <path id="Path_60245" data-name="Path 60245" d="M20,21.25H14.5a.75.75,0,0,1-.75-.75V16a1.75,1.75,0,0,0-3.5,0v4.5a.75.75,0,0,1-.75.75H4a.75.75,0,0,1-.75-.75V11.914A2.769,2.769,0,0,1,4.056,9.97l6.707-6.707a1.749,1.749,0,0,1,2.475,0L19.944,9.97a2.769,2.769,0,0,1,.806,1.944V20.5A.75.75,0,0,1,20,21.25Zm-4.75-1.5h4V11.914a1.259,1.259,0,0,0-.366-.884L12.177,4.323a.249.249,0,0,0-.353,0L5.116,11.03a1.259,1.259,0,0,0-.366.884V19.75h4V16a3.25,3.25,0,0,1,6.5,0Z" fill="#11222e"/>
+  <rect id="Rectangle_6572" data-name="Rectangle 6572" width="24" height="24" fill="none"/>
+</svg>

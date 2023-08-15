@@ -16,7 +16,7 @@
 @import "@ionic/angular/css/normalize.css";
 @import "@ionic/angular/css/structure.css";
 @import "@ionic/angular/css/typography.css";
-@import '@ionic/angular/css/display.css';
+@import "@ionic/angular/css/display.css";
 
 /* Optional CSS utils that can be commented out */
 @import "@ionic/angular/css/padding.css";
@@ -24,3 +24,28 @@
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
+@import "animate.css";
+
+@import "swiper/scss";
+@import "swiper/scss/navigation";
+@import "swiper/scss/pagination";
+// fonts
+@font-face {
+  font-family: "regular";
+  src: url("./assets/fonts/Droidregular.ttf");
+}
+@font-face {
+  font-family: "bold";
+  src: url("./assets/fonts/DroidBold.ttf");
+}
+ion-header::after {
+  display: none;
+  --box-shadow: none;
+}
+
+body {
+  direction: rtl;
+}
+* {
+  font-family: "regular";
+}

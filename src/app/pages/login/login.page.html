@@ -1,0 +1,27 @@
+<ion-content>
+  <div class="container">
+    <div class="logo">
+      <img src="../../../assets/images/logo.png" alt="">
+    </div>
+
+    <form [formGroup]="form">
+      <p class="hello">أهلا بك</p>
+      <!-- <div class="itembox"> -->
+      <ion-item lines="none">
+        <img src="../../../assets/images/category.svg" alt="">
+
+        <ion-input formControlName="username" placeholder="ادخل اسم المستخدم"></ion-input>
+      </ion-item>
+      <ion-item lines="none">
+        <img src="../../../assets/images/pass.svg" alt="">
+        <ion-input formControlName="password" [type]="type" placeholder="ادخل كلمة المرور"></ion-input>
+        <ion-icon (click)="toggoleType()" name="eye-{{type=='password'? '':'off-'}}outline"></ion-icon>
+
+      </ion-item>
+      <!-- </div> -->
+
+      <ion-button mode="ios" (click)="nav('tabs/home')" expand="block">تسجيل الدخول</ion-button>
+      <p class="register" (click)="nav('register')">إنشاء حساب</p>
+    </form>
+  </div>
+</ion-content>

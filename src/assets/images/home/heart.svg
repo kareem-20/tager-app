@@ -1,0 +1,7 @@
+<svg id="category" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <path id="Path_58571" data-name="Path 58571" d="M0,0H32V32H0Z" fill="none"/>
+  <g id="Group_15339" data-name="Group 15339" transform="translate(4 4)">
+    <path id="Path_60250" data-name="Path 60250" d="M0,0H24V24H0Z" fill="none"/>
+    <path id="Icon_awesome-heart" data-name="Icon awesome-heart" d="M16.367,3.332a4.841,4.841,0,0,0-6.606.481l-.7.719-.7-.719a4.841,4.841,0,0,0-6.606-.481,5.084,5.084,0,0,0-.35,7.36l6.851,7.074a1.11,1.11,0,0,0,1.6,0l6.851-7.074a5.08,5.08,0,0,0-.347-7.36Z" transform="translate(2.937 1.822)" fill="none" stroke="#6f7a81" stroke-width="2"/>
+  </g>
+</svg>

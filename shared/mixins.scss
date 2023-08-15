@@ -1,0 +1,9 @@
+@mixin text($color,$size,$family,$linHeight) {
+  color: $color;font-size: #{$size}px;font-family: $family;line-height: #{$linHeight}px;
+}
+@mixin flex($just,$align,$gap) {
+  display: flex;justify-content: $just;align-items: $align;gap: #{$gap}px;
+}
+@mixin size($w,$h) {
+  width: #{$w}px;height: #{$h}px;
+}

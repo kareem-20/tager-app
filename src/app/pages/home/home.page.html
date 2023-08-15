@@ -1,0 +1,123 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-button slot="start" shape="round" fill="clear">
+      <img src="../../../assets/images/home/menu.svg" alt="">
+    </ion-button>
+    <ion-item lines="none">
+      <input type="search" name="" id="" placeholder="البحث عن منتج">
+      <ion-icon slot="end" name="search"></ion-icon>
+    </ion-item>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <swiper-container #swiper [slidesPerView]="1" [spaceBetween]="0" [autoplay]="true" [loop]="true"
+    direction="horizontal" [pagination]="{clickable:true,dynamicBullets:true}">
+
+    <swiper-slide>
+      <img src="../../../assets/images/home/offer_slider.png" alt="">
+    </swiper-slide>
+
+    <swiper-slide>
+      <img src="../../../assets/images/home/offer_slider.png" alt="">
+
+    </swiper-slide>
+    <swiper-slide>
+      <img src="../../../assets/images/home/offer_slider.png" alt="">
+
+    </swiper-slide>
+    <swiper-slide>
+      <img src="../../../assets/images/home/offer_slider.png" alt="">
+
+    </swiper-slide>
+  </swiper-container>
+  <div class="adds">
+    إعلان نصي داخل التطبيق قابل للتغيير
+  </div>
+  <div class="container">
+    <!-- <h2 class="title">الاقسام</h2> -->
+    <div class="title animate__animated animate__fadeIn">
+      <h2>الأقسام</h2>
+      <ion-button fill="clear" (click)="nav('/tabs/pages/category')">عرض الكل</ion-button>
+    </div>
+  </div>
+  <div class="categories animate__animated animate__fadeIn">
+    <div class="item" *ngFor="let item of categories">
+      <div class="img">
+        <ion-img src="../../../assets/images/home/blue-t-shirt.png"></ion-img>
+      </div>
+      <p>الكترونيات</p>
+    </div>
+  </div>
+  <div class="container">
+
+    <!-- <div class="homeMainItems">
+      <div class="itemBox animate__animated animate__zoomIn ">
+        <div class="image">
+          <img src="../../../assets/images/home/blue-t-shirt.png" alt="">
+        </div>
+        <div class="itemBody">
+          <p>Galaxy A13 Black</p>
+        </div>
+      </div>
+      <div class="itemBox animate__animated animate__zoomIn">
+        <div class="image">
+          <img src="../../../assets/images/home/blue-t-shirt.png" alt="">
+        </div>
+        <div class="itemBody">
+          <p>Galaxy A13 Black</p>
+        </div>
+      </div>
+      <div class="itemBox animate__animated animate__zoomIn ">
+        <div class="image">
+          <img src="../../../assets/images/home/blue-t-shirt.png" alt="">
+        </div>
+        <div class="itemBody">
+          <p>Galaxy A13 Black</p>
+        </div>
+      </div>
+    </div> -->
+
+    <!-- <h2 class="title">أحدث المنتجات</h2> -->
+    <div class="title animate__animated animate__fadeIn">
+      <h2>أحدث المنتجات</h2>
+      <ion-button fill="clear" (click)="nav('/tabs/pages/category')">عرض الكل</ion-button>
+    </div>
+  </div>
+  <div class="itemsSlide">
+    <div class="product animate__animated animate__zoomIn" *ngFor="let product of products;let i=index">
+      <div class="fav">
+        <ion-img src="../../../assets/images/home/like{{product%2? '_act':''}}.svg"></ion-img>
+        <!-- <ion-img src="../../../assets/images/like_act.svg"></ion-img> -->
+      </div>
+      <div class="img">
+        <img src="../../../assets/images/home/phto1-1.png" />
+      </div>
+      <div class="text">
+        <!-- <p class="name">هاتف سمارت 6 ثنائي الشريحة بذاكرة رام سعة</p> -->
+        <div class="note">
+          <p>هاتف سمارت 6 ثنائي الشريحة بذاكرة رام سعة </p>
+        </div>
+        <div class="price">
+          <p>سعر الجملة</p>
+          <div>
+            <h2>32,000</h2>
+            <span>دع</span>
+          </div>
+        </div>
+        <div class="price">
+          <p>سعر البيع</p>
+          <div>
+            <h2>32,000</h2>
+            <span>دع</span>
+          </div>
+        </div>
+
+        <ion-button expand="block" fill="outline">إضافة
+          للسلة</ion-button>
+        <!-- <ion-button *ngIf="product.addedToCart" expand="block" fill="outline" disabled>مضاف للسلة</ion-button> -->
+      </div>
+    </div>
+  </div>
+</ion-content>

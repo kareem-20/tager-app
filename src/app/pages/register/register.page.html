@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-button slot="start" (click)="nav()" shape="round" fill="clear">
+      <img src="../../../assets/images/back.png" alt="">
+    </ion-button>
+    <ion-title>إنشاء حساب</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container">
+    <div class="logo">
+      <img src="../../../assets/images/logo.png" alt="">
+    </div>
+
+    <form [formGroup]="form">
+
+
+      <ion-item lines="none">
+        <img src="../../../assets/images/category.svg" alt="">
+        <ion-input formControlName="username" placeholder="ادخل اسم المستخدم"></ion-input>
+      </ion-item>
+
+      <ion-item lines="none">
+        <img src="../../../assets/images/user.svg" alt="">
+        <ion-input formControlName="username" placeholder="ادخل اسم المستخدم"></ion-input>
+      </ion-item>
+
+      <ion-item lines="none">
+        <img src="../../../assets/images/pass.svg" alt="">
+        <ion-input formControlName="password" [type]="type" placeholder="ادخل كلمة المرور"></ion-input>
+        <ion-icon (click)="toggoleType()" name="eye-{{type=='password'? '':'off-'}}outline"></ion-icon>
+      </ion-item>
+
+      <ion-item lines="none">
+        <img src="../../../assets/images/pass.svg" alt="">
+        <ion-input formControlName="password" [type]="type" placeholder="ادخل كلمة المرور"></ion-input>
+        <ion-icon (click)="toggoleType()" name="eye-{{type=='password'? '':'off-'}}outline"></ion-icon>
+      </ion-item>
+
+
+      <ion-button mode="ios" (click)="nav('tabs/home')" expand="block">إنشاء حساب</ion-button>
+
+    </form>
+  </div>
+</ion-content>

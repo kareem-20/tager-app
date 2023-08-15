@@ -1,0 +1,42 @@
+.container {
+  padding: 30px 16px;
+  max-width: 720px;
+  margin: auto;
+}
+
+.logo {
+  text-align: center;
+}
+
+form {
+  //   margin-top: 20%;
+  // padding: 16px;
+
+  p.hello {
+    font-family: "bold";
+    font-size: 19px;
+    text-align: center;
+  }
+  ion-item {
+    border: 1px solid #87899e;
+    border-radius: 28px;
+    margin: 12px 0 24px;
+    --inner-padding-top: 0;
+
+    ion-input {
+      --padding-bottom: 0;
+      --padding-top: 0;
+    }
+  }
+  ion-button {
+    color: #fff;
+  }
+
+  .register {
+    text-align: center;
+    text-decoration: underline;
+    font-family: "bold";
+    font-size: 15px;
+    margin-top: 30px;
+  }
+}
