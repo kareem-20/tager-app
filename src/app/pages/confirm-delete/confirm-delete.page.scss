@@ -1,0 +1,67 @@
+@import "../../../../shared/mixins.scss";
+ion-header,
+ion-toolbar {
+  height: 25px;
+  border-radius: 50%;
+}
+.container {
+  padding-top: 30px;
+  .head {
+    @include text(var(--dark-text), 16, "bold", 31);
+    transform: translateY(-7px);
+    text-align: center;
+  }
+  .item {
+    margin-bottom: 8px;
+    padding: 8px 0 0 16px;
+    @include flex(flex-start, center, 10px);
+    .img {
+      width: 30%;
+      ion-img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+    }
+    .content {
+      flex: 1;
+      @include flex(space-between, flex-start, 10px);
+      .text {
+        p {
+          margin: 0;
+          @include text(var(--dark-text), 16, "regular", 31);
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+          text-overflow: ellipsis;
+          overflow: hidden;
+        }
+        h2 {
+          margin: 0;
+          @include text(var(--dark-text), 20, "bold", 38);
+          span {
+            margin-right: 4px;
+            font-size: 14px;
+            font-family: "regular";
+          }
+        }
+      }
+    }
+  }
+  .btns {
+    padding: 6px;
+    @include flex(space-between, center, 0);
+    gap: 10%;
+    ion-button {
+      flex: 1;
+      --border-radius: 8px;
+      height: 44px;
+      @include text(#344a53, 16, "regular", 31);
+      --background: #f3f4f5;
+      &:nth-child(2) {
+        color: #ffffff;
+        --background: #d42c11;
+      }
+    }
+  }
+}

@@ -1,13 +1,55 @@
-<ion-header [translucent]="true">
+<ion-header mode="ios">
   <ion-toolbar>
-    <ion-title>cart</ion-title>
+    <ion-label>السلة</ion-label>
+    <!-- <div class="end ion-activatable" slot="end">
+      <ion-img src="../../../assets/images/user.svg"></ion-img>
+      <ion-ripple-effect type="bounded"></ion-ripple-effect>
+    </div> -->
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">cart</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <div class="container">
+    <div class="head animate__animated animate__fadeIn">
+      <div class="start">({{items.length}}) منتج</div>
+      <ion-button fill="clear" color="danger" (click)="clearCart()">حذف الكل</ion-button>
+    </div>
+    <!--  -->
+    <div class="items animate__animated animate__fadeIn">
+      <div class="item" *ngFor="let item of items;let i=index">
+        <div class="img">
+          <ion-img src="../../../assets/images/home/phto1-1.png"></ion-img>
+        </div>
+        <div class="content">
+          <div class="text">
+            <p>هاتف سمارت 6 ثنائي الشريحة بذاكرة رام سعة </p>
+            <h2>{{'32000' |number}}<span>د.ع</span></h2>
+            <div class="operations">
+              <div class="increase ion-activatable">
+                <ion-img src="../../../assets/images/low.svg"></ion-img>
+                <ion-ripple-effect type="bounded"></ion-ripple-effect>
+              </div>
+              <div class="qty">{{5}}</div>
+
+              <div class=" decrease ion-activatable">
+                <ion-img src="../../../assets/images/high.svg"></ion-img>
+                <ion-ripple-effect type="bounded"></ion-ripple-effect>
+              </div>
+            </div>
+          </div>
+          <div class="delete ion-activatable" (click)="deleteItem(item,i)">
+            <ion-img src="../../../assets/images/delete.png"></ion-img>
+            <p>حذف</p>
+            <ion-ripple-effect type="bounded"></ion-ripple-effect>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ion-footer class="animate__animated animate__fadeIn">
+    <!-- <div class="row"><p>المنتجات</p><p>405 <span>د.ع</span></p></div>
+    <div class="row"><p>خدمة التوصيل</p><p>40 <span>د.ع</span></p></div>
+    <div class="row bold"><p>المطلوب</p><p>4054 <span>د.ع</span></p></div> -->
+    <ion-button [disabled]="!items.length" (click)="nav('/confirm')" expand="block">إتمام الشراء</ion-button>
+  </ion-footer>
 </ion-content>

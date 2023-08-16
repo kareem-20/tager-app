@@ -1,24 +1,24 @@
 <ion-tabs>
   <ion-tab-bar slot="bottom,top">
-    <ion-tab-button tab="home">
-      <ion-img src="../../../assets/images/home/home-house.4.svg" alt=""></ion-img>
-      <ion-label>الرئيسية</ion-label>
+    <ion-tab-button #tab1 tab="home">
+      <ion-img src="../../../assets/images/home/home{{tab1.selected?'_act':''}}.svg" alt=""></ion-img>
+      <ion-label [class.active]="tab1.selected">الرئيسية</ion-label>
     </ion-tab-button>
-    <ion-tab-button tab="fav">
-      <ion-img src="../../../assets/images/home/heart.svg" alt=""></ion-img>
-      <ion-label>المفضلة</ion-label>
+    <ion-tab-button #tab2 tab="fav">
+      <ion-img src="../../../assets/images/home/heart{{tab2.selected?'_act':''}}.svg" alt=""></ion-img>
+      <ion-label [class.active]="tab2.selected">المفضلة</ion-label>
     </ion-tab-button>
-    <ion-tab-button tab="offers">
-      <ion-img src="../../../assets/images/home/offer.svg" alt=""></ion-img>
-      <ion-label>العروض</ion-label>
+    <ion-tab-button #tab3 tab="offers">
+      <ion-img src="../../../assets/images/home/offer{{tab3.selected?'_act':''}}.svg" alt=""></ion-img>
+      <ion-label [class.active]="tab3.selected">العروض</ion-label>
     </ion-tab-button>
-    <ion-tab-button tab="cart">
-      <ion-img src="../../../assets/images/home/cart.svg" alt=""></ion-img>
-      <ion-label>السلة</ion-label>
+    <ion-tab-button #tab4 tab="cart">
+      <ion-img src="../../../assets/images/home/cart{{tab4.selected?'_act':''}}.svg" alt=""></ion-img>
+      <ion-label [class.active]="tab4.selected">السلة</ion-label>
     </ion-tab-button>
-    <ion-tab-button tab="account">
-      <ion-img src="../../../assets/images/home/person.svg" alt=""></ion-img>
-      <ion-label>حسابي</ion-label>
+    <ion-tab-button #tab5 tab="account">
+      <ion-img src="../../../assets/images/home/account{{tab5.selected?'_act':''}}.svg" alt=""></ion-img>
+      <ion-label [class.active]="tab5.selected">حسابي</ion-label>
     </ion-tab-button>
   </ion-tab-bar>
 </ion-tabs>

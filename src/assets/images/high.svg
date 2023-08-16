@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
+  <g id="low" transform="translate(-12 -44)">
+    <g id="bills">
+      <rect id="Rectangle_6119" data-name="Rectangle 6119" width="40" height="40" rx="8" transform="translate(12 44)" fill="#da950c" opacity="0.15"/>
+      <g id="Group_14224" data-name="Group 14224" transform="translate(20 52)">
+        <path id="Path_59199" data-name="Path 59199" d="M0,0H24V24H0Z" fill="none"/>
+        <line id="Line_188" data-name="Line 188" y2="14" transform="translate(12 5)" fill="none" stroke="#da950c" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+        <line id="Line_189" data-name="Line 189" x2="14" transform="translate(5 12)" fill="none" stroke="#da950c" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+      </g>
+    </g>
+  </g>
+</svg>

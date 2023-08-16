@@ -1,0 +1,77 @@
+<ion-header mode="ios">
+  <ion-toolbar>
+    <div (click)="back()" slot="start" class="start ion-activatable">
+      <img src="../../../assets/images/back.png" alt="">
+      <ion-ripple-effect type="bounded"></ion-ripple-effect>
+    </div>
+    <ion-label>كشف حساب</ion-label>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container">
+    <div class="items">
+
+      <!-- <ion-item class="animate__animated delay1-1 animate__fadeInLeft" lines="none" button>
+        <ion-img src="../../../assets/imags/market/message.svg"></ion-img>
+        <ion-label>
+          <h1></h1>
+        </ion-label>
+      </ion-item> -->
+      <div class="welcome">
+        <p>اهلا بك</p>
+        <h3>kareem adeel</h3>
+      </div>
+      <div class="myHead animate__animated delay1-2 animate__fadeIn">
+
+        <h1>
+          214543 <sub> د.ع </sub> </h1>
+        <p>رصيدك الحالي</p>
+      </div>
+
+      <div class="categories">
+        <div class="item animate__animated animate__fadeIn">
+          <div class="img">
+            <img src="../../../assets/images/bill/Group 60688-1.svg" />
+            <h4>24 طلب</h4>
+
+          </div>
+          <h2>21414
+            د.ع</h2>
+          <p>طلب بالإنتظار</p>
+        </div>
+        <div class="item animate__animated animate__fadeIn">
+          <div class="img">
+            <img src="../../../assets/images/bill/Group 60688-2.svg" />
+            <h4>43 طلب</h4>
+          </div>
+          <h2>412422 د.ع</h2>
+          <p>طلب تم توصيله</p>
+        </div>
+        <div class="item animate__animated animate__fadeIn">
+          <div class="img">
+            <img src="../../../assets/images/bill/Group 60688.svg" />
+            <h4>{{523234|number}} طلب</h4>
+
+          </div>
+          <h2>{{532324 |number}} د.ع</h2>
+          <p>طلبات راجعة</p>
+        </div>
+        <div class="item animate__animated animate__fadeIn">
+          <div class="img">
+            <img src="../../../assets/images/bill/Group 60694.svg" />
+            <h4>{{0|number}} طلب</h4>
+          </div>
+          <h2>
+            {{23512 |number}} د.ع</h2>
+          <p>المبالغ المضافة</p>
+        </div>
+      </div>
+
+
+      <!-- error View && Loading  -->
+
+    </div>
+  </div>
+</ion-content>

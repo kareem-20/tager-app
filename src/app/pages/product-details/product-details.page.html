@@ -1,13 +1,113 @@
-<ion-header [translucent]="true">
+<ion-header mode="ios">
   <ion-toolbar>
-    <ion-title>product-details</ion-title>
+    <div (click)="back()" slot="start" class="start ion-activatable">
+      <ion-img src="../../../assets/images/back.png"></ion-img>
+      <ion-ripple-effect type="bounded"></ion-ripple-effect>
+    </div>
+    <div class="search">
+      <ion-img src="../../../assets/images/category/search.svg"></ion-img>
+      <ion-input placeholder="البحث عن منتج"></ion-input>
+    </div>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">product-details</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <div class="container animate__animated animate__fadeIn">
+    <div class="all">
+      <div class="contain">
+        <swiper-container #swiper [slidesPerView]="1" [spaceBetween]="0" [autoplay]="true" [loop]="true"
+          direction="horizontal" [pagination]="{clickable:true,dynamicBullets:true}">
+
+          <swiper-slide>
+            <img src="../../../assets/images/home/blue-t-shirt.png" />
+          </swiper-slide>
+          <swiper-slide>
+            <img src="../../../assets/images/home/blue-t-shirt.png" />
+          </swiper-slide>
+        </swiper-container>
+        <div class="fav">
+          <ion-img src="../../../assets/images/home/like.svg"></ion-img>
+          <!-- <ion-img src="../../../assets/images/like_act.svg"></ion-img> -->
+        </div>
+      </div>
+      <!--  -->
+      <h2 class="head">هاتف سمارت 6 </h2>
+      <!--  -->
+      <p class="description">هاتف سمارت 6 ثنائي الشريحة بذاكرة رام سعة</p>
+      <!--  -->
+      <!-- <div class="descount">
+        <div class="percent">% <span>15</span>خصم</div>
+        <div class="del">50,000</div>
+      </div> -->
+      <!--  -->
+      <div class="price">
+        <span>سعر الشراء :</span>
+        <span>544 <span>د.ع</span></span>
+      </div>
+      <div class="customer-price">
+        <!-- <h2>سعر الزبون :</h2> -->
+        <div class="contain">
+          <div class="low">
+            <p>اقل سعر بيع</p>
+            <h2>466<span>د.ع</span></h2>
+          </div>
+          <div class="hight">
+            <p>اعلي سعر بيع</p>
+            <h2>360<span>د.ع</span></h2>
+          </div>
+        </div>
+      </div>
+      <!--  -->
+      <div class="btns">
+        <div class="one">
+          <div class="increase ion-activatable">
+            <ion-img src="../../../assets/images/low.svg"></ion-img>
+            <ion-ripple-effect type="bounded"></ion-ripple-effect>
+          </div>
+          <span>{{3}}</span>
+          <div class="decrease ion-activatable">
+            <ion-img src="../../../assets/images/high.svg"></ion-img>
+            <ion-ripple-effect type="bounded"></ion-ripple-effect>
+          </div>
+
+        </div>
+        <ion-button expand="block">إضافة للسلة</ion-button>
+      </div>
+    </div>
+    <!--  -->
+    <div class="title">منتجات مشابهة</div>
+    <!--  -->
+    <div class="products">
+      <div class="product" *ngFor="let product of products;let i=index">
+        <div class="fav">
+          <ion-img src="../../../assets/images/home/like{{product%2? '_act':''}}.svg"></ion-img>
+          <!-- <ion-img src="../../../assets/images/like_act.svg"></ion-img> -->
+        </div>
+        <div class="img">
+          <img src="../../../assets/images/home/phto1-1.png" />
+        </div>
+        <div class="text">
+          <!-- <p class="name">{{product?.ITEM_NAME}}</p> -->
+          <div class="note">
+            <p>هاتف سمارت 6 ثنائي الشريحة بذاكرة رام سعة </p>
+          </div>
+          <div class="price">
+            <p>سعر الجملة</p>
+            <div>
+              <h2>32,000</h2>
+              <span>دع</span>
+            </div>
+          </div>
+          <div class="price">
+            <p>سعر البيع</p>
+            <div>
+              <h2>32,000</h2>
+              <span>دع</span>
+            </div>
+          </div>
+          <ion-button expand="block" fill="outline">إضافة للسلة</ion-button>
+        </div>
+      </div>
+    </div>
+  </div>
 </ion-content>

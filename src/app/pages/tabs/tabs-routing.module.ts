@@ -35,6 +35,13 @@ const routes: Routes = [
             (m) => m.CategoryPageModule
           ),
       },
+      {
+        path: 'cart',
+        loadChildren: () =>
+          import('../cart/cart-routing.module').then(
+            (m) => m.CartPageRoutingModule
+          ),
+      },
     ],
   },
 ];

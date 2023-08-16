@@ -1,0 +1,42 @@
+<ion-header mode="ios">
+  <ion-toolbar>
+    <ion-img (click)="nav()" slot="start" src="../../../assets/images/back.png"></ion-img>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container animate__animated animate__fadeIn">
+    <div class="img ">
+      <ion-img src="../../../assets/images/vector_Error _ done.svg"></ion-img>
+    </div>
+    <!--  -->
+    <div class="title">جاري تجهيز<span>طلبك</span></div>
+    <!--  -->
+    <div class="info">
+      <div class="head">
+        <div class="start">
+          <ion-icon name="reader-outline"></ion-icon>
+          <p>#46546</p>
+        </div>
+        <div class="end">8أبريل03:30 Pm</div>
+      </div>
+      <div class="item">
+        <div class="start">بإسم</div>
+        <div class="end">محمود عبد العظيم</div>
+      </div>
+      <div class="item">
+        <div class="start">العنوان</div>
+        <div class="end">بغداد - شارع البر بجوار صيدلية علي</div>
+      </div>
+      <div class="item end">
+        <div class="start">المطلوب</div>
+        <div class="end">123<span>د.ع</span></div>
+      </div>
+    </div>
+    <div class="btns">
+      <ion-button (click)="nav('tabs/home')" fill="outline" expand="block">متابعة التسوق</ion-button>
+    </div>
+  </div>
+</ion-content>
+
+<!--  -->

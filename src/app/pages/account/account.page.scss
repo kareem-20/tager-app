@@ -1,0 +1,74 @@
+@import "../../../../shared/mixins.scss";
+ion-header {
+  ion-toolbar {
+    padding-top: 8px;
+    .start {
+      position: relative;
+      overflow: hidden;
+      color: var(--light-text);
+      @include flex(center, center, 0);
+      @include size(40, 40);
+      border-radius: 50%;
+      border: 1px solid #f3f4f5;
+      margin-left: 16px;
+    }
+    ion-label {
+      @include text(var(--dark-text), 20, "bold", 38);
+      text-align: center;
+    }
+    .end {
+      position: relative;
+      overflow: hidden;
+      color: var(--light-text);
+      @include flex(center, center, 0);
+      @include size(32, 32);
+      border-radius: 50%;
+      border: 1px solid #f3f4f5;
+    }
+  }
+  .search {
+    padding: 4px 12px;
+    border: 1px solid #f3f4f5;
+    border-radius: 18px;
+    @include flex(flex-start, center, 8);
+    ion-mg {
+      @include size(24, 24);
+    }
+    ion-input {
+      @include text(var(--dark-text), 12, "regular", 27);
+      --padding-top: 0;
+      --padding-bottom: 0;
+    }
+  }
+}
+
+.container {
+  padding: 16px;
+}
+
+ion-content {
+  --background: #f5f5f5;
+}
+
+.items {
+  padding: 16px 0;
+  ion-item {
+    --inner-padding-top: 12px;
+    --inner-padding-bottom: 12px;
+    margin-block: 16px;
+    border-radius: 7px;
+    box-shadow: 0 2px 8px 0 #1c292e1a;
+    ion-img {
+      width: 32px;
+      height: 32px;
+      margin-inline-end: 16px;
+    }
+    ion-label {
+      line-height: 31px;
+      color: var(--dark-text);
+      font-size: 16px;
+      font-family: "bold";
+      margin: 0;
+    }
+  }
+}

@@ -1,0 +1,81 @@
+<ion-header mode="ios">
+  <ion-toolbar>
+    <div (click)="back()" slot="start" class="ion-activatable">
+      <ion-img src="../../../assets/images/back.png"></ion-img>
+      <ion-ripple-effect type="bounded"></ion-ripple-effect>
+    </div>
+    <ion-label>إكمال الطلب</ion-label>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="container animate__animated animate__fadeIn">
+    <div class="title">أدخل سعر الذبون</div>
+
+    <div class="items">
+
+      <div *ngFor="let item of items">
+        <div class="product">
+          <img src="../../../assets/images/home/blue-t-shirt.png">
+          <div class="content">
+            <p>MS02 2D Glove Bluetooth Barcode Scanner</p>
+            <div>
+              <div class="price">321,233<span>د.ع</span></div>
+              <div class="qty">2<span>منتجات</span></div>
+            </div>
+          </div>
+        </div>
+
+        <ion-label>سعر الذبون</ion-label>
+
+        <ion-item [class.invalid]="item.salary > item.max || item.salary < item.min && item.salary != null" mode="md"
+          lines="none">
+          <ion-input type="number" [(ngModel)]="item.salary"
+            placeholder="نطاق سعر الذبون {{item.min}} د.ع - {{item.max}} د.ع"></ion-input>
+          <div slot="end">
+            <div class="qty">{{item.qty}}x</div>
+            <div *ngIf="item.salary" class="total">{{item.salary*item.qty | number}}<span>د.ع</span></div>
+          </div>
+        </ion-item>
+
+        <div class="note">
+          <span *ngIf="item.salary > item.max || item.salary < item.min && item.salary != null">يجب إدخال سعر أعلى من
+            الحد الأدنى و أقل من الحد الأعلى </span>
+        </div>
+
+      </div>
+
+    </div>
+    <h2 class="title_methods">التوصيل</h2>
+    <div class="methods">
+
+      <div>
+        <div>
+          <h2>بغداد</h2>
+          <p> 5,000 د.ع</p>
+        </div>
+      </div>
+      <div class="active">
+        <div>
+          <h2>محافظات</h2>
+          <p> 8,000 د.ع</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="states">
+      <p>تفاصيل السعر</p>
+      <div><span>سعر الجملة الإجمالي</span> <span>3,002 <span>د.ع</span></span></div>
+      <div><span>الخصومات</span> <span>0 <span>د.ع</span></span></div>
+      <div><span>الربح</span> <span>78,23 <span>د.ع</span></span></div>
+      <div><span>سعر الذبون</span> <span>9839,00 <span>د.ع</span></span></div>
+    </div>
+  </div>
+
+  <ion-footer class="animate__animated animate__fadeIn">
+    <ion-button (click)="nav('/done-order')" expand="block">إستمر</ion-button>
+  </ion-footer>
+
+</ion-content>

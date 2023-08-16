@@ -46,9 +46,44 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'confirm-delete',
+    loadChildren: () =>
+      import('./pages/confirm-delete/confirm-delete.module').then(
+        (m) => m.ConfirmDeletePageModule
+      ),
+  },
+  {
     path: 'tabs',
     loadChildren: () =>
       import('./pages/tabs/tabs.module').then((m) => m.TabsPageModule),
+  },
+  {
+    path: 'balance-account',
+    loadChildren: () =>
+      import('./pages/balance-account/balance-account.module').then(
+        (m) => m.BalanceAccountPageModule
+      ),
+  },
+  {
+    path: 'orders',
+    loadChildren: () =>
+      import('./pages/orders/orders.module').then((m) => m.OrdersPageModule),
+  },
+  {
+    path: 'confirm',
+    loadChildren: () =>
+      import('./pages/confirm/confirm.module').then((m) => m.ConfirmPageModule),
+  },
+  {
+    path: 'done-order',
+    loadChildren: () =>
+      import('./pages/done-order/done-order.module').then(
+        (m) => m.DoneOrderPageModule
+      ),
+  },
+  {
+    path: 'profile',
+    loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)
   },
 ];
 

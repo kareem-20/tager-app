@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-product-details',
@@ -6,10 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./product-details.page.scss'],
 })
 export class ProductDetailsPage implements OnInit {
+  products: any[] = [1, 2, 3, 4];
+  constructor(private navCtrl: NavController) {}
 
-  constructor() { }
-
-  ngOnInit() {
+  ngOnInit() {}
+  back() {
+    this.navCtrl.back();
   }
-
 }

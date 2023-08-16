@@ -22,7 +22,7 @@ ion-header {
 }
 
 .container {
-  padding: 0px 16px 10px;
+  padding: 16px 16px 10px;
   max-width: 720px;
   margin: auto;
 }
@@ -110,7 +110,7 @@ swiper-slide img {
   }
   ion-button {
     @include size(78, 31);
-    @include text(var(--ion-color-primary), 16, "regular", 31);
+    @include text(var(--ion-color-primary), 14, "regular", 31);
   }
 }
 .categories {

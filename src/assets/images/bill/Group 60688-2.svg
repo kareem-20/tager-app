@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30">
+  <g id="Group_60688" data-name="Group 60688" transform="translate(-313 -336)">
+    <rect id="Rectangle_6593" data-name="Rectangle 6593" width="30" height="30" rx="4" transform="translate(313 336)" fill="rgba(7,193,31,0.18)"/>
+    <g id="Icon_feather-check-circle" data-name="Icon feather-check-circle" transform="translate(317.27 340.279)">
+      <path id="Path_60318" data-name="Path 60318" d="M18.46,10.014v.711A7.73,7.73,0,1,1,13.876,3.66" transform="translate(0 0)" fill="none" stroke="#07c11f" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+      <path id="Path_60319" data-name="Path 60319" d="M23.549,6l-7.73,7.738L13.5,11.419" transform="translate(-5.089 -1.459)" fill="none" stroke="#07c11f" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+    </g>
+  </g>
+</svg>

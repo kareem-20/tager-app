@@ -1,0 +1,65 @@
+<ion-header mode="ios">
+  <ion-toolbar>
+    <div (click)="back()" slot="start" class="start ion-activatable">
+      <ion-img src="../../../assets/images/back.png"></ion-img>
+      <ion-ripple-effect type="bounded"></ion-ripple-effect>
+    </div>
+    <ion-label>طلباتي</ion-label>
+
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <div class="container">
+    <ion-segment mode="ios" value="1">
+      <ion-segment-button value="1">
+        <ion-label>جميع الطلبات</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="2">
+        <ion-label>الطلبات الحالية</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="3">
+        <ion-label>الطلبات السابقة</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+
+    <div class="items">
+      <div class="p-item animate__animated delay1-{{i+1}}"
+        [ngClass]="i%2? 'animate__fadeInLeft' : 'animate__fadeInRight'" *ngFor="let bill of orders;let i=index">
+        <!-- <p>رقم الفاتورة</p> -->
+        <div class="item one">
+          <div class="start">#46546</div>
+          <div class="end">{{ 33425444 |date:'d/MM/yyyy hh:mm a' }}</div>
+        </div>
+        <div class="item">
+          <div class="start">عدد المنتجات</div>
+          <div class="end">3منتج</div>
+        </div>
+        <div class="item">
+          <div class="start">اسم الزبون</div>
+          <div class="end">محمد علاء سعفان</div>
+        </div>
+        <div class="item">
+          <div class="start">رقم الهاتف</div>
+          <div class="end">+964 773 228 4555</div>
+        </div>
+        <div class="item">
+          <div class="start">العنوان</div>
+          <div class="end">بغداد - شارع البر بجوار صيدلية علي</div>
+        </div>
+        <!-- <div class="item">
+          <div class="start">كلفة البيع</div>
+          <div class="end">{{bill?.NET_SALES - bill?.TOTAL_MANDOOB_ITEM |number}}</div>
+        </div> -->
+        <!-- <div class="item end">
+          <div class="start">اجور التوصيل</div>
+          <div class="end color">{{bill?.INFO.deliveryCost |number}} $</div>
+        </div> -->
+        <!-- <ion-button expand="block" >فتح</ion-button> -->
+        <!-- <div class="foot"> -->
+        <!-- <ion-img src="../../../assets/imags/market/more-dot.svg"></ion-img> -->
+        <!-- </div> -->
+      </div>
+    </div>
+  </div>
+</ion-content>

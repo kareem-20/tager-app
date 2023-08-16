@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
+  <g id="low" transform="translate(-12 -44)">
+    <g id="bills">
+      <g id="Rectangle_6119" data-name="Rectangle 6119" transform="translate(12 44)" fill="#fff" stroke="#f3f4f5" stroke-width="1">
+        <rect width="40" height="40" rx="8" stroke="none"/>
+        <rect x="0.5" y="0.5" width="39" height="39" rx="7.5" fill="none"/>
+      </g>
+      <g id="Group_14223" data-name="Group 14223" transform="translate(20 52)">
+        <path id="Path_59198" data-name="Path 59198" d="M0,0H24V24H0Z" fill="none"/>
+        <line id="Line_187" data-name="Line 187" x2="14" transform="translate(5 12)" fill="none" stroke="#1c292e" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+      </g>
+    </g>
+  </g>
+</svg>

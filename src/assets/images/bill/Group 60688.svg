@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30">
+  <g id="Group_60688" data-name="Group 60688" transform="translate(-313 -336)">
+    <rect id="Rectangle_6593" data-name="Rectangle 6593" width="30" height="30" rx="4" transform="translate(313 336)" fill="rgba(32,133,162,0.18)"/>
+    <g id="Icon_feather-archive" data-name="Icon feather-archive" transform="translate(317.052 338.77)">
+      <path id="Path_60313" data-name="Path 60313" d="M19.961,12V23.166H4.5V12" transform="translate(-1.282 -3.205)" fill="none" stroke="#2085a2" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+      <path id="Path_60314" data-name="Path 60314" d="M1.5,4.5H20.4V8.795H1.5Z" fill="none" stroke="#2085a2" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+      <path id="Path_60315" data-name="Path 60315" d="M15,18h3.436" transform="translate(-5.77 -5.77)" fill="none" stroke="#2085a2" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+    </g>
+  </g>
+</svg>
