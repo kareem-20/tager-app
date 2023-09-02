@@ -1,0 +1,55 @@
+<ion-header mode="ios">
+  <ion-toolbar>
+    <div (click)="back()" slot="start" class="ion-activatable">
+      <ion-img src="../../../assets/images/back.png"></ion-img>
+      <ion-ripple-effect type="bounded"></ion-ripple-effect>
+    </div>
+    <ion-label>إضافة زبون جديد</ion-label>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container animate__animated animate__fadeIn">
+    <form [formGroup]="form">
+      <ion-list lines="none">
+
+        <ion-label>رقم الهاتف</ion-label>
+        <ion-item mode="md">
+          <ion-input type="tel" formControlName="PHONE_1" placeholder="رقم الهاتف"></ion-input>
+        </ion-item>
+
+        <ion-label>رقم الهاتف الثاني</ion-label>
+        <ion-item mode="md">
+          <ion-input type="tel" formControlName="PHONE_2" placeholder="رقم الهاتف الثاني"></ion-input>
+        </ion-item>
+
+        <ion-label>اسم الزبون</ion-label>
+        <ion-item mode="md">
+          <ion-input formControlName="RECEVER_NAME" placeholder="اسم الزبون"></ion-input>
+        </ion-item>
+
+        <ion-label>المحافظة</ion-label>
+        <ion-item mode="md">
+          <!-- <ion-select mode="ios" formControlName="ZONE_NAME" placeholder="إختار المحافظة" interface="alert"
+            [interfaceOptions]="{header: 'إختر المحافظة'}" cancelText="إلغاء" okText="تم">
+            <ion-select-option *ngFor="let city of cityes" [value]="city._id">{{city.name}}</ion-select-option>
+          </ion-select> -->
+          <ion-input formControlName="ZONE_NAME"></ion-input>
+
+        </ion-item>
+
+        <ion-label>عنوان الزبون</ion-label>
+        <textarea formControlName="ADDRESS" placeholder="عنوان الزبون"></textarea>
+
+        <ion-label>ملاحظات</ion-label>
+        <textarea formControlName="NOTE" placeholder="ملاحظات"></textarea>
+
+      </ion-list>
+    </form>
+  </div>
+
+  <ion-footer class="animate__animated animate__fadeIn">
+    <ion-button [disabled]="!form.valid" (click)="save()" expand="block">حفظ الزبون</ion-button>
+  </ion-footer>
+
+</ion-content>

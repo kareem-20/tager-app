@@ -19,9 +19,10 @@
   <div class="container">
     <div class="categories">
       <div [style]="{background:item.color}" class="item animate__animated animate__fadeIn"
-        *ngFor="let item of categories;let i=index">
+        *ngFor="let item of categories;let i=index" (click)="categoryProducts(item)">
         <div class="img"><img
-            [src]="item?.CATEGORY_IMAGE_PATH  ?item?.CATEGORY_IMAGE_PATH:'../../../assets/images/shirt.png'" /></div>
+            [src]="item?.CATEGORY_IMAGE_PATH  ?item?.CATEGORY_IMAGE_PATH:'../../../assets/images/home/blue-t-shirt.png'" />
+        </div>
         <p>{{item?.CATEGORY_NAME}}</p>
       </div>
     </div>

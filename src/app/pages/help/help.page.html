@@ -1,0 +1,15 @@
+<ion-header mode="ios">
+  <ion-toolbar>
+    <div (click)="back()" slot="start" class="start ion-activatable">
+      <ion-img src="../../../assets/images/back.png"></ion-img>
+      <ion-ripple-effect type="bounded"></ion-ripple-effect>
+    </div>
+    <ion-label>مساعدة</ion-label>
+
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="container">
+    <div class="text" [innerHTML]="text"></div>
+  </div>
+</ion-content>

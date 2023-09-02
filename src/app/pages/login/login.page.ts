@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NavController } from '@ionic/angular';
+import { AlertController, NavController } from '@ionic/angular';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -8,28 +9,40 @@ import { NavController } from '@ionic/angular';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  type: string = 'password';
-  form: FormGroup;
-
+  type = 'password';
   constructor(
-    private navCtrl: NavController,
-    private formBuilder: FormBuilder
-  ) {
-    this.createForm();
-  }
+    private authService: AuthService,
+    private alertCtrl: AlertController
+  ) {}
 
   ngOnInit() {}
-  nav(path?: string) {
-    if (path) return this.navCtrl.navigateForward(path);
-    this.navCtrl.pop();
-  }
-  createForm() {
-    this.form = this.formBuilder.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required],
+
+  async showAlert() {
+    const alert = await this.alertCtrl.create({
+      header: 'تسجيل الدخول',
+      message: 'ادخل الكود الخاص بك',
+      mode: 'ios',
+      inputs: [
+        {
+          type: 'text',
+          name: 'PIN_CODE',
+        },
+      ],
+      buttons: [
+        {
+          text: 'ارسال',
+          handler: async (val) => {
+            console.log(val);
+            await this.authService.loginWithBinCode(val);
+            // this.userData = this.authService.userData;
+          },
+        },
+        {
+          text: 'الغاء',
+          role: 'cancel',
+        },
+      ],
     });
-  }
-  toggoleType() {
-    this.type = this.type == 'password' ? 'text' : 'password';
+    await alert.present();
   }
 }

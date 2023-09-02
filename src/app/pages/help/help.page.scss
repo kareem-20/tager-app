@@ -1,0 +1,24 @@
+@import "../../../../shared/mixins.scss";
+ion-header {
+  ion-toolbar {
+    padding-top: 8px;
+    .start {
+      position: relative;
+      overflow: hidden;
+      color: var(--light-text);
+      @include flex(center, center, 0);
+      @include size(32, 32);
+      border-radius: 50%;
+      border: 1px solid #f3f4f5;
+      margin-left: 16px;
+    }
+    ion-label {
+      @include text(var(--dark-text), 20, "bold", 38);
+    }
+  }
+}
+.container {
+  padding: 24px 16px 50px;
+  max-width: 1024px;
+  margin: auto;
+}

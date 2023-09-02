@@ -1,39 +1,51 @@
 <ion-header>
   <ion-toolbar>
-    <ion-button slot="start" shape="round" fill="clear">
+    <ion-button slot="start" shape="round" fill="clear" (click)="nav('notification')">
       <img src="../../../assets/images/home/menu.svg" alt="">
     </ion-button>
     <ion-item lines="none">
-      <input type="search" name="" id="" placeholder="البحث عن منتج">
-      <ion-icon slot="end" name="search"></ion-icon>
+      <ion-input mode="ios" type="text" name="search" id="" placeholder="البحث عن منتج" (ionInput)="search($event)"
+        [(ngModel)]="searchQuery" (ionBlur)="searchQuery = ''"></ion-input>
+      <!-- <ion-icon slot="end" name="search"></ion-icon> -->
     </ion-item>
 
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-list *ngIf="searchList.length" class="searchList" style="max-height: 300px;overflow-y: scroll;z-index: 999;">
+    <ion-item *ngFor="let item of searchList;let i = index" class="animate__animated animate__fadeIn"
+      (click)="details(item)">
+      <ion-avatar slot="start">
+        <img [defaultImage]="'../../../assets/shopping-loader.gif'" [lazyLoad]="item.IMG_URL"
+          [errorImage]="'../../../assets/shopping-loader.gif'" />
+      </ion-avatar>
+      <ion-label>{{ item?.ITEM_NAME }}</ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" pullFactor="0.8" pullMin="60" pullMax="120">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div class="segmentContainer">
+    <div class="box" *ngFor="let cat of categories" [class.active]="activeCat ==cat?.CATEGORY_CODE"
+      (click)="changeCategory(cat)">
+      <p>{{cat?.CATEGORY_NAME}}</p>
+    </div>
+
+  </div>
   <swiper-container #swiper [slidesPerView]="1" [spaceBetween]="0" [autoplay]="true" [loop]="true"
     direction="horizontal" [pagination]="{clickable:true,dynamicBullets:true}">
-
+    <swiper-slide *ngFor="let slide of slides">
+      <img [src]="slide?.IMAGE_PATH_ONLINE" alt="">
+    </swiper-slide>
+    <!-- 
     <swiper-slide>
       <img src="../../../assets/images/home/offer_slider.png" alt="">
-    </swiper-slide>
-
-    <swiper-slide>
-      <img src="../../../assets/images/home/offer_slider.png" alt="">
-
-    </swiper-slide>
-    <swiper-slide>
-      <img src="../../../assets/images/home/offer_slider.png" alt="">
-
-    </swiper-slide>
-    <swiper-slide>
-      <img src="../../../assets/images/home/offer_slider.png" alt="">
-
-    </swiper-slide>
+    </swiper-slide> -->
   </swiper-container>
   <div class="adds">
-    إعلان نصي داخل التطبيق قابل للتغيير
+    {{add??'إعلان نصي داخل التطبيق قابل للتغيير'}}
   </div>
   <!-- <div class="container">
     <div class="title animate__animated animate__fadeIn">
@@ -49,74 +61,113 @@
       <p>الكترونيات</p>
     </div>
   </div> -->
-  <div class="container">
-    <div class="homeMainItems">
-      <div class="itemBox animate__animated animate__zoomIn ">
-        <div class="image">
-          <img src="../../../assets/images/home/blue-t-shirt.png" alt="">
-        </div>
-        <div class="itemBody">
-          <p>Galaxy A13 Black</p>
-        </div>
-      </div>
-      <div class="itemBox animate__animated animate__zoomIn">
-        <div class="image">
-          <img src="../../../assets/images/home/blue-t-shirt.png" alt="">
-        </div>
-        <div class="itemBody">
-          <p>Galaxy A13 Black</p>
-        </div>
-      </div>
-      <div class="itemBox animate__animated animate__zoomIn ">
-        <div class="image">
-          <img src="../../../assets/images/home/blue-t-shirt.png" alt="">
-        </div>
-        <div class="itemBody">
-          <p>Galaxy A13 Black</p>
-        </div>
-      </div>
-    </div>
+  <!-- <div class="container"> -->
 
-    <!-- <h2 class="title">أحدث المنتجات</h2> -->
-    <div class="title animate__animated animate__fadeIn">
-      <h2>أحدث المنتجات</h2>
-      <ion-button fill="clear" (click)="nav('/tabs/pages/category')">عرض الكل</ion-button>
-    </div>
-  </div>
   <div class="itemsSlide">
-    <div class="product animate__animated animate__zoomIn" *ngFor="let product of products;let i=index"
-      (click)="nav('product-details')">
+    <div class="loading-slide" *ngIf="categoryProductLoading">
+      <ion-spinner name="bubbles"></ion-spinner>
+    </div>
+    <div class="loading-slide" *ngIf="categoryProductEmpty">
+      <p>لا يوجد منتجات بهذا القسم حاليا</p>
+    </div>
+    <div class="product animate__animated animate__zoomIn"
+      *ngFor="let product of categoryProducts;let i=index;trackBy:trackFn">
       <div class="fav">
-        <ion-img src="../../../assets/images/home/like{{product%2? '_act':''}}.svg"></ion-img>
+        <ion-img (click)="toggleFav(product)"
+          [src]="product.favorite ? '../../../assets/images/home/like_act.svg' :'../../../assets/images/home/like.svg'"></ion-img>
         <!-- <ion-img src="../../../assets/images/like_act.svg"></ion-img> -->
       </div>
-      <div class="img">
-        <img src="../../../assets/images/home/phto1-1.png" />
+      <div class="img" (click)="details(product)">
+        <img [defaultImage]="'../../../assets/shopping-loader.gif'" [lazyLoad]="product?.IMG_URL"
+          [errorImage]="'../../../assets/shopping-loader.gif'" />
       </div>
       <div class="text">
-        <!-- <p class="name">هاتف سمارت 6 ثنائي الشريحة بذاكرة رام سعة</p> -->
+        <!-- <p class="name">{{product?.ITEM_NAME}}</p> -->
         <div class="note">
-          <p>هاتف سمارت 6 ثنائي الشريحة بذاكرة رام سعة </p>
+          <p>{{product?.ITEM_NAME}} </p>
         </div>
         <div class="price">
           <p>سعر الجملة</p>
           <div>
-            <h2>32,000</h2>
+            <h2>{{product?.PRICE_SALE_1 |number}}</h2>
             <span>دع</span>
           </div>
         </div>
         <div class="price">
           <p>سعر البيع</p>
           <div>
-            <h2>32,000</h2>
+            <h2>{{product?.PRICE_SALE_2 |number}} - {{product?.PRICE_SALE_3 |number}}</h2>
             <span>دع</span>
           </div>
         </div>
-
-        <ion-button expand="block" fill="outline">إضافة
+        <ion-button *ngIf="!product?.addedToCart" expand="block" fill="outline" (click)="addItem(product)">إضافة
           للسلة</ion-button>
+        <ion-button *ngIf="product?.addedToCart" expand="block" fill="outline" disabled>مضاف للسلة</ion-button>
+
         <!-- <ion-button *ngIf="product.addedToCart" expand="block" fill="outline" disabled>مضاف للسلة</ion-button> -->
       </div>
+    </div>
+    <div class="product animate__animated animate__zoomIn next"
+      *ngIf="!categoryProductEmpty && !categoryProductLoading && maxPageCategory >skipCategoryProducts"
+      (click)="loadCategoryData()">
+      <p>عرض المزيد</p>
+    </div>
+
+  </div>
+  <div class="title animate__animated animate__fadeIn">
+    <h2>أحدث المنتجات</h2>
+    <!-- <ion-button fill="clear" (click)="nav('/tabs/pages/category')">عرض الكل</ion-button> -->
+  </div>
+  <!-- </div> -->
+  <div class="itemsSlide" #itemsSlide>
+    <div class="product animate__animated animate__zoomIn" *ngFor="let product of products;let i=index;trackBy:trackFn">
+      <div class="fav">
+        <ion-img (click)="toggleFav(product)"
+          [src]="product.favorite ? '../../../assets/images/home/like_act.svg' :'../../../assets/images/home/like.svg'"></ion-img>
+        <!-- <ion-img src="../../../assets/images/like_act.svg"></ion-img> -->
+      </div>
+      <div class="img" (click)="details(product)">
+        <img [defaultImage]="'../../../assets/shopping-loader.gif'" [lazyLoad]="product?.IMG_URL"
+          [errorImage]="'../../../assets/shopping-loader.gif'" />
+      </div>
+      <div class="text">
+        <!-- <p class="name">{{product?.ITEM_NAME}}</p> -->
+        <div class="note">
+          <p>{{product?.ITEM_NAME}} </p>
+        </div>
+        <div class="price">
+          <p>سعر الجملة</p>
+          <div>
+            <h2>{{product?.PRICE_SALE_1 |number}}</h2>
+            <span>دع</span>
+          </div>
+        </div>
+        <div class="price">
+          <p>سعر البيع</p>
+          <div>
+            <h2>{{product?.PRICE_SALE_2 |number}} - {{product?.PRICE_SALE_3 |number}}</h2>
+            <span>دع</span>
+          </div>
+        </div>
+        <ion-button *ngIf="!product?.addedToCart" expand="block" fill="outline" (click)="addItem(product)">إضافة
+          للسلة</ion-button>
+        <ion-button *ngIf="product?.addedToCart" expand="block" fill="outline" disabled>مضاف للسلة</ion-button>
+
+        <!-- <ion-button *ngIf="product.addedToCart" expand="block" fill="outline" disabled>مضاف للسلة</ion-button> -->
+      </div>
+    </div>
+
+  </div>
+  <div *ngIf="loading" class="loading">
+    <ion-spinner></ion-spinner>
+  </div>
+
+  <div *ngIf="errorView" class="error">
+    <div class="content">
+      <ion-icon name="alert-circle-outline"></ion-icon>
+      <ion-text color="medium">
+        <p>خطأ بالشبكة يرجي المحاولة لاحقاً</p>
+      </ion-text>
     </div>
   </div>
 </ion-content>

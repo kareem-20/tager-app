@@ -21,12 +21,12 @@
       </ion-item> -->
       <div class="welcome">
         <p>اهلا بك</p>
-        <h3>kareem adeel</h3>
+        <h3>{{authService.userData.MANDOOB_NAME}}</h3>
       </div>
       <div class="myHead animate__animated delay1-2 animate__fadeIn">
 
         <h1>
-          214543 <sub> د.ع </sub> </h1>
+          {{data?.BALANCE_CUR * -1 |number}} <sub> د.ع </sub> </h1>
         <p>رصيدك الحالي</p>
       </div>
 
@@ -34,28 +34,29 @@
         <div class="item animate__animated animate__fadeIn">
           <div class="img">
             <img src="../../../assets/images/bill/Group 60688-1.svg" />
-            <h4>24 طلب</h4>
+            <h4>{{dataCount?.watingCount|number}} طلب</h4>
 
           </div>
-          <h2>21414
+          <h2>{{dataCount?.watingSum |number
+            }}
             د.ع</h2>
           <p>طلب بالإنتظار</p>
         </div>
         <div class="item animate__animated animate__fadeIn">
           <div class="img">
             <img src="../../../assets/images/bill/Group 60688-2.svg" />
-            <h4>43 طلب</h4>
+            <h4>{{dataCount?.deliverdCount|number}} طلب</h4>
           </div>
-          <h2>412422 د.ع</h2>
+          <h2>{{dataCount?.deliverdSum |number}} د.ع</h2>
           <p>طلب تم توصيله</p>
         </div>
         <div class="item animate__animated animate__fadeIn">
           <div class="img">
             <img src="../../../assets/images/bill/Group 60688.svg" />
-            <h4>{{523234|number}} طلب</h4>
+            <h4>{{dataCount?.returnCount|number}} طلب</h4>
 
           </div>
-          <h2>{{532324 |number}} د.ع</h2>
+          <h2>{{dataCount?.returnSum |number}} د.ع</h2>
           <p>طلبات راجعة</p>
         </div>
         <div class="item animate__animated animate__fadeIn">
@@ -63,8 +64,8 @@
             <img src="../../../assets/images/bill/Group 60694.svg" />
             <h4>{{0|number}} طلب</h4>
           </div>
-          <h2>
-            {{23512 |number}} د.ع</h2>
+          <h2 [style]="dataCount?.money >0 ?'color:var(--ion-color-primary)':'color:var(--ion-color-danger)'">
+            {{dataCount?.money |number}} د.ع</h2>
           <p>المبالغ المضافة</p>
         </div>
       </div>

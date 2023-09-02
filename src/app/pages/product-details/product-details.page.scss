@@ -156,7 +156,7 @@ p.description {
     margin: 6px 0 12px;
     div {
       p {
-        @include text(var(--light-text), 14, "semi-bold", 18);
+        @include text(var(--light-text), 14, "bold", 18);
         margin: 0;
       }
       h2 {

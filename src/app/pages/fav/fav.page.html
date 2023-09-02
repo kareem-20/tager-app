@@ -20,47 +20,48 @@
   </ion-refresher> -->
   <div class="container">
     <div class="offers animate__animated animate__fadeIn">
-      <div class="offer" *ngFor="let product of offers;let i=index">
+      <div class="offer" *ngFor="let product of fav;let i=index">
         <div class="fav">
-          <ion-img src="../../../assets/images/home/like_act.svg"></ion-img>
+          <ion-img (click)="toggleFav(product)"
+            [src]="product.favorite ? '../../../assets/images/home/like_act.svg' :'../../../assets/images/home/like.svg'"></ion-img>
         </div>
         <!-- <div class="discount">% <span>15</span>خصم</div> -->
         <!--  -->
-        <div class="img">
-          <img src="../../../assets/images/home/phto1-1.png" />
+        <div class="img" (click)="details(product)">
+          <img [defaultImage]="'../../../assets/shopping-loader.gif'" [lazyLoad]="product?.IMG_URL"
+            [errorImage]="'../../../assets/shopping-loader.gif'" />
         </div>
         <div class="text">
           <!-- <p class="name">{{product?.ITEM_NAME}}</p> -->
           <div class="note">
-            <p>هاتف سمارت 6 ثنائي الشريحة بذاكرة رام سعة </p>
+            <p>{{product?.ITEM_NAME}} </p>
           </div>
           <div class="price">
             <p>سعر الجملة</p>
             <div>
-              <h2>32,000</h2>
+              <h2>{{product?.PRICE_SALE_1 |number}}</h2>
               <span>دع</span>
             </div>
           </div>
           <div class="price">
             <p>سعر البيع</p>
             <div>
-              <h2>32,000</h2>
+              <h2>{{product?.PRICE_SALE_2 |number}}</h2>
               <span>دع</span>
             </div>
           </div>
-          <ion-button *ngIf="i%3==0" expand="block" fill="outline">إضافة
+          <ion-button *ngIf="!product?.addedToCart" (click)="addItem(product)" expand="block" fill="outline">إضافة
             للسلة</ion-button>
-          <div *ngIf="i%3!=0" class="btn">
-            <div class="ion-activatable">
+          <div *ngIf="product?.addedToCart" class="btn">
+            <div class="ion-activatable" (click)="decrese(product)">
               <ion-img src="../../../assets/images/low.svg"></ion-img>
               <ion-ripple-effect type="bounded"></ion-ripple-effect>
             </div>
-            <span>{{1}}</span>
-            <div class="ion-activatable white">
+            <span>{{product?.QTY}}</span>
+            <div class="ion-activatable white" (click)="increse(product)">
               <ion-img src="../../../assets/images/high.svg"></ion-img>
               <ion-ripple-effect type="bounded"></ion-ripple-effect>
             </div>
-
           </div>
         </div>
       </div>

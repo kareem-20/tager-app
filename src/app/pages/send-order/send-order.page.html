@@ -1,0 +1,34 @@
+<ion-header mode="ios">
+  <ion-toolbar>
+    <div (click)="back()" slot="start" class="ion-activatable">
+      <ion-img src="../../../assets/images/back.png"></ion-img>
+      <ion-ripple-effect type="bounded"></ion-ripple-effect>
+    </div>
+    <ion-label>تفاصيل الدفع</ion-label>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="container animate__animated animate__fadeIn">
+    <div>
+      <img src="../../../assets/images/vector_Error _ done.svg" alt="">
+    </div>
+    <div class="states">
+      <div><span>سعر الزبون الإجمالي</span> <span>{{clientPrice |number}} <span>د.ع</span></span></div>
+      <div><span>سعر الشراء الفعلي</span> <span>{{totalPrice |number}} <span>د.ع</span></span></div>
+      <!-- <div><span>العروض و الخصومات</span> <span>0 <span>د.ع</span></span></div> -->
+      <div><span>الربح</span> <span>{{clientPrice -(totalPrice + selectedZone?.REGION_SELL||0)||0 |number}}
+          <span>د.ع</span></span></div>
+      <div><span>كلفة التوصيل</span> <span>{{selectedZone?.REGION_SELL||0 |number}} <span>د.ع</span></span></div>
+      <div><span>مجموع الطلب</span> <span>{{clientPrice +( selectedZone?.REGION_SELL||0)|number}}
+          <span>د.ع</span></span></div>
+    </div>
+
+  </div>
+
+  <ion-footer class="animate__animated animate__fadeIn">
+    <ion-button (click)="postData()" expand="block">إستمر</ion-button>
+  </ion-footer>
+
+</ion-content>

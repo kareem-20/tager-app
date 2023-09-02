@@ -85,7 +85,7 @@ ion-header {
       border: 1px solid #cdcdcdc0;
       border-radius: 12px;
       ion-input {
-        @include text(var(--dark-text), 12, "semi-bold", 22);
+        @include text(var(--dark-text), 10, "semi-bold", 22);
       }
       div[slot="end"] {
         @include flex(center, flex-end, 2);

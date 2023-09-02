@@ -1,4 +1,4 @@
-<ion-tabs>
+<ion-tabs (ionTabsWillChange)="change($event)">
   <ion-tab-bar slot="bottom,top">
     <ion-tab-button #tab1 tab="home">
       <ion-img src="../../../assets/images/home/home{{tab1.selected?'_act':''}}.svg" alt=""></ion-img>
@@ -15,6 +15,8 @@
     <ion-tab-button #tab4 tab="cart">
       <ion-img src="../../../assets/images/home/cart{{tab4.selected?'_act':''}}.svg" alt=""></ion-img>
       <ion-label [class.active]="tab4.selected">السلة</ion-label>
+      <ion-badge mode="ios">{{cartCount}}</ion-badge>
+
     </ion-tab-button>
     <ion-tab-button #tab5 tab="account">
       <ion-img src="../../../assets/images/home/account{{tab5.selected?'_act':''}}.svg" alt=""></ion-img>

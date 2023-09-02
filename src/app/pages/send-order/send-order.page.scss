@@ -1,0 +1,45 @@
+@import '../../../../shared/mixins.scss';
+ion-header{
+  ion-toolbar{
+    padding-top: 8px;
+    div[slot='start']{
+      position: relative;overflow: hidden;color: var(--light-text);
+      @include flex(center,center,0);
+      @include size(32,32);border-radius: 50%;
+      border: 1px solid #F3F4F5;
+      margin-left: 16px;
+    }
+    ion-label{@include text(var(--dark-text),20,'bold',30)}
+    ion-button{
+      --padding-start: 0;--padding-end: 0;
+      @include size(60,35);
+      ion-icon{font-size: 1.7rem;}
+    }
+  }
+}
+
+.container{
+  padding: 16px 16px 85px;
+}
+
+.states{
+  margin-top: 30px;
+  div{
+    @include flex(space-between,center,0);margin-bottom: 12px;
+    font-size: 15px;font-family: 'semi-bold';
+    span{span{margin-right: 65px;}}
+    color: var(--light-text);
+    &:nth-child(2){color: #1578f9;}
+    &:nth-child(3){color: var(--ion-color-primary);}
+    &:last-child{color: var(--ion-color-danger);}
+  }
+}
+
+ion-footer{
+  position: fixed;
+  bottom: 0;left: 0;
+  background: white;
+  box-shadow: 0 -1px 8px 0 #0825371A;
+  padding: 12px 16px 15px;
+  ion-button{--border-radius: 8px;height: 48px;@include text(white,14,'bold',27);}
+}

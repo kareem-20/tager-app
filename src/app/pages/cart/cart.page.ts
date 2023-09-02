@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController, NavController } from '@ionic/angular';
+import {
+  AlertController,
+  ModalController,
+  NavController,
+} from '@ionic/angular';
 import { CartService } from 'src/app/services/cart/cart.service';
 import { ConfirmDeletePage } from '../confirm-delete/confirm-delete.page';
 
@@ -9,18 +13,19 @@ import { ConfirmDeletePage } from '../confirm-delete/confirm-delete.page';
   styleUrls: ['./cart.page.scss'],
 })
 export class CartPage implements OnInit {
-  items: any[] = [2, 1, 4];
+  items: any[] = [];
 
   constructor(
     private modalCtrl: ModalController,
     private navCtrl: NavController,
+    private alertCtrl: AlertController,
     private cartService: CartService
   ) {}
 
   ngOnInit() {}
 
   ionViewWillEnter() {
-    // this.items = this.cartService.items;
+    this.items = this.cartService.items;
     console.log(this.items);
   }
 
@@ -47,10 +52,26 @@ export class CartPage implements OnInit {
     this.navCtrl.pop();
   }
 
-  clearCart() {
-    this.cartService.clearCart().then(() => {
-      this.items = [];
+  async clearCart() {
+    const alert = await this.alertCtrl.create({
+      header: 'هل تريد حذف كل العناصر',
+      mode: 'ios',
+      buttons: [
+        {
+          text: 'الغاء',
+          role: 'cancel',
+        },
+        {
+          text: 'حذف',
+          handler: () => {
+            this.cartService.clearCart().then(() => {
+              this.items = [];
+            });
+          },
+        },
+      ],
     });
+    await alert.present();
   }
   increseCount(index: number) {
     this.items[index].QTY++;

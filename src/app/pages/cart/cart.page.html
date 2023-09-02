@@ -17,21 +17,20 @@
     <!--  -->
     <div class="items animate__animated animate__fadeIn">
       <div class="item" *ngFor="let item of items;let i=index">
-        <div class="img">
-          <ion-img src="../../../assets/images/home/phto1-1.png"></ion-img>
-        </div>
+        <div class="img"><ion-img [src]="item?.IMG_URL ?? '../../../assets/shopping-loader.gif'"></ion-img></div>
+
         <div class="content">
           <div class="text">
-            <p>هاتف سمارت 6 ثنائي الشريحة بذاكرة رام سعة </p>
-            <h2>{{'32000' |number}}<span>د.ع</span></h2>
+            <p>{{item?.ITEM_NAME}}</p>
+            <h2>{{item?.PRICE_SALE_1 |number}}<span>د.ع</span></h2>
             <div class="operations">
-              <div class="increase ion-activatable">
+              <div class="increase ion-activatable" (click)="decreseCount(i)">
                 <ion-img src="../../../assets/images/low.svg"></ion-img>
                 <ion-ripple-effect type="bounded"></ion-ripple-effect>
               </div>
-              <div class="qty">{{5}}</div>
+              <div class="qty">{{item?.QTY}}</div>
 
-              <div class=" decrease ion-activatable">
+              <div class=" decrease ion-activatable" (click)="increseCount(i)">
                 <ion-img src="../../../assets/images/high.svg"></ion-img>
                 <ion-ripple-effect type="bounded"></ion-ripple-effect>
               </div>

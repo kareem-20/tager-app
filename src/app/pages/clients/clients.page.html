@@ -1,0 +1,67 @@
+<ion-header mode="ios">
+  <ion-toolbar>
+    <div (click)="back()" slot="start" class="ion-activatable">
+      <ion-img src="../../../assets/images/back.png"></ion-img>
+      <ion-ripple-effect type="bounded"></ion-ripple-effect>
+    </div>
+    <ion-label>حدد الزبون</ion-label>
+    <!-- <ion-button color="light" slot="end" (click)="showSearchBar()"><ion-icon
+        name="search-outline"></ion-icon></ion-button> -->
+
+    <ion-button (click)="nav('/add-client')" color="light" slot="end"><ion-icon name="add"></ion-icon></ion-button>
+  </ion-toolbar>
+  <ion-toolbar>
+    <div class="search">
+      <ion-img src="../../../assets/images/category/search.svg"></ion-img>
+      <ion-input placeholder="البحث عن زبون" [(ngModel)]='search_txt' (ionChange)="getClients()"></ion-input>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <div class="container animate__animated animate__fadeIn">
+
+    <p>الزبائن</p>
+
+    <div class="clients">
+      <div [class.active]="currentClient == client" *ngFor="let client of clients;let i=index">
+        <div class="top">
+          <div (click)="choose(client)">
+            <p>{{client?.RECEVER_NAME}}</p>
+            <span>{{client?.ADDRESS}}/{{client?.ZONE_NAME}}</span>
+            <h2>{{client?.NOTE}}</h2>
+          </div>
+          <!-- <ion-button (click)="deleteClient(client, i)" color="danger" fill="outline"><ion-icon
+              name="trash"></ion-icon></ion-button> -->
+        </div>
+        <p (click)="choose(client)">{{client?.PHONE_1}}</p>
+      </div>
+    </div>
+
+  </div>
+  <div *ngIf="emptyView" class="empty">
+    <div class="content">
+      <ion-icon name="happy-outline"></ion-icon>
+      <ion-text color="medium">
+        <p>لا يوجد زبائن</p>
+      </ion-text>
+    </div>
+  </div>
+  <div *ngIf="loading" class="loading">
+    <ion-spinner></ion-spinner>
+  </div>
+
+  <div *ngIf="errorView" class="error">
+    <div class="content">
+      <ion-icon name="alert-circle-outline"></ion-icon>
+      <ion-text color="medium">
+        <p>خطأ بالشبكة يرجي المحاولة لاحقاً</p>
+      </ion-text>
+    </div>
+  </div>
+  <ion-footer class="animate__animated animate__fadeIn">
+    <ion-button [disabled]="!currentClient" (click)="confirm()" expand="block">إستمر</ion-button>
+  </ion-footer>
+
+</ion-content>

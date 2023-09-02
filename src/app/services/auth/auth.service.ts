@@ -78,7 +78,7 @@ export class AuthService {
         if (user.data[0]) {
           this.userData = await this.storage.set(USER, user.data[0]);
           this.functionService.presentToast('تم تسجيل الدخول بنجاح');
-          this.navCtrl.navigateRoot('/');
+          this.navCtrl.navigateRoot('/tabs/home');
         }
 
         this.functionService.dismissLoading();

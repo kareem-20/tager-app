@@ -8,9 +8,9 @@ import { take } from 'rxjs/operators';
 })
 export class DataService {
   private data: any = {};
-  private baseUrl: string = 'http://localhost:3030';
+  private baseUrl: string = 'http://api-iraqsoft.com:46584';
   change: BehaviorSubject<number> = new BehaviorSubject(0);
-
+  baseMongoUrl: string = 'http://209.250.237.58:5640';
   constructor(private http: HttpClient) {}
 
   setParams(body: any) {
@@ -19,6 +19,9 @@ export class DataService {
 
   get params() {
     return this.data;
+  }
+  getMongoData(endPoint: string) {
+    return this.http.get(this.baseMongoUrl + endPoint).pipe(take(1));
   }
 
   getData(endPoint: string) {

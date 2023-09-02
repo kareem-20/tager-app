@@ -7,14 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { CartPageRoutingModule } from './cart-routing.module';
 
 import { CartPage } from './cart.page';
+import { LazyLoadImageModule } from 'ng-lazyload-image';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
+    LazyLoadImageModule,
     IonicModule,
-    CartPageRoutingModule
+    CartPageRoutingModule,
   ],
-  declarations: [CartPage]
+  declarations: [CartPage],
 })
 export class CartPageModule {}

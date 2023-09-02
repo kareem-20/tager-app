@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">tager-app</string>
-    <string name="title_activity_main">tager-app</string>
+    <string name="app_name">منصة تاجر</string>
+    <string name="title_activity_main">منصة تاجر</string>
     <string name="package_name">app.tager.com</string>
     <string name="custom_url_scheme">app.tager.com</string>
 </resources>

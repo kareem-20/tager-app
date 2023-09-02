@@ -1,0 +1,109 @@
+<ion-header mode="ios">
+  <ion-toolbar>
+    <div (click)="back()" slot="start" class="start ion-activatable">
+      <ion-img src="../../../assets/images/back.png"></ion-img>
+      <ion-ripple-effect type="bounded"></ion-ripple-effect>
+    </div>
+    <ion-label>تفاصيل الطلب</ion-label>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container">
+
+    <div class="items">
+      <div class="p-item ">
+        <!-- <p>رقم الفاتورة</p> -->
+        <div class="item one">
+          <div class="start">
+            <img src="../../../assets/Group 14183.svg" alt=""> #{{ bill?.T_ID }}
+          </div>
+          <div class="end">{{ bill?.D_TIME |date:'d/MM/yyyy hh:mm a' }}</div>
+        </div>
+
+        <div class="item">
+          <div class="start">اسم الزبون</div>
+          <div class="end">{{bill?.CLIENT_NAME}}</div>
+        </div>
+        <div class="item">
+          <div class="start">عدد المنتجات</div>
+          <div class="end">{{bill?.DETAILS.length}}</div>
+        </div>
+        <div class="item">
+          <div class="start">رقم الهاتف</div>
+          <div class="end">{{bill?.CLIENT_PHONE}}</div>
+        </div>
+        <div class="item">
+          <div class="start">العنوان</div>
+          <div class="end">{{bill?.CLIENT_ADDRESS}}</div>
+        </div>
+        <!-- <div class="item">
+          <div class="start">سعر البيع</div>
+          <div class="end">{{bill?.INFO?.TOTAL|number}}</div>
+        </div> -->
+
+      </div>
+    </div>
+
+    <h2>المنتجات</h2>
+
+    <div class="itemsSlide">
+      <div class="product animate__animated animate__zoomIn" *ngFor="let product of items;let i=index">
+
+        <div class="img">
+          <img [defaultImage]="'../../../assets/shopping-loader.gif'" [lazyLoad]="product?.IMG_URL"
+            [errorImage]="'../../../assets/shopping-loader.gif'" />
+        </div>
+        <div class="text">
+          <!-- <p class="name">{{product?.ITEM_NAME}}</p> -->
+          <div class="note">
+            <p>{{product?.ITEM_NAME}} </p>
+          </div>
+          <div class="price">
+            <p>السعر</p>
+            <div>
+              <h2>{{product?.PRICE_SALE_1 |number}}</h2>
+              <span>دع</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <h2>تفاصيل الدفع</h2>
+
+    <div class="items">
+      <div class="p-item ">
+
+
+        <div class="item">
+          <div class="start">طريقة الدفع</div>
+          <div class="end">{{"دفع عند الاستلام"}}</div>
+        </div>
+        <div class="item">
+          <div class="start">المنتجات</div>
+          <div class="end">{{bill?.INFO.TOTAL |number}}</div>
+        </div>
+        <div class="item ">
+          <div class="start">التوصيل</div>
+          <div class="end ">{{bill?.INFO.DELIVERYCOST |number}}</div>
+        </div>
+        <div class="item">
+          <div class="start">الخصم</div>
+          <div class="end">{{bill?.INFO.TOTAL_DISCOUNT |number}}</div>
+        </div>
+        <div class="item">
+          <div class="start">المطلوب</div>
+          <div class="end">{{(bill?.INFO.TOTAL + bill?.INFO.DELIVERYCOST -bill?.INFO.TOTAL_DISCOUNT)|number}}</div>
+        </div>
+        <!-- <div class="item">
+          <div class="start">سعر البيع</div>
+          <div class="end">{{bill?.INFO?.TOTAL|number}}</div>
+        </div> -->
+
+      </div>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "27951922947",
+    "project_id": "tager-bcfb2",
+    "storage_bucket": "tager-bcfb2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:27951922947:android:d2f98bdf10b117b64fb336",
+        "android_client_info": {
+          "package_name": "app.tager.com"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "27951922947-69m1eq255d4tb523v8er6qdo154f1pkm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCAOp7deURMnOlhV-AwWLYr0lBpmAQyGtw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "27951922947-69m1eq255d4tb523v8er6qdo154f1pkm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -7,14 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { FavPageRoutingModule } from './fav-routing.module';
 
 import { FavPage } from './fav.page';
+import { LazyLoadImageModule } from 'ng-lazyload-image';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    FavPageRoutingModule
+    LazyLoadImageModule,
+    FavPageRoutingModule,
   ],
-  declarations: [FavPage]
+  declarations: [FavPage],
 })
 export class FavPageModule {}

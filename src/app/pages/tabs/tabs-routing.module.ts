@@ -42,6 +42,14 @@ const routes: Routes = [
             (m) => m.CartPageRoutingModule
           ),
       },
+      {
+        path: 'products/:id',
+        loadChildren: () =>
+          import('../products/products.module').then(
+            (m) => m.ProductsPageModule
+          ),
+      },
+      
     ],
   },
 ];

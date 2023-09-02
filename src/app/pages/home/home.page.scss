@@ -19,6 +19,13 @@ ion-header {
     max-width: 100%;
     font-size: 14px;
   }
+  ion-input {
+    border: 1px solid #f3f4f5;
+    box-shadow: 0px 3px 6px #cccccc33;
+    border-radius: 20px;
+    // margin-inline-start: 0;
+    --padding-start: 10px !important;
+  }
 }
 
 .container {
@@ -26,12 +33,60 @@ ion-header {
   max-width: 720px;
   margin: auto;
 }
+ion-searchbar {
+  width: 100%;
+  display: inline-block;
+  --padding: 0;
+  padding: 0;
+  margin-top: 14px;
+  ion-icon {
+    margin: 0;
+  }
+}
+.searchList {
+  position: absolute;
+  z-index: 999;
+  max-width: 100%;
+  width: 92%;
+  background: transparent;
 
+  ion-item {
+    --background: rgba(255, 255, 255, 0.95);
+  }
+}
+
+.segmentContainer {
+  padding-inline-start: 14px;
+  overflow-x: scroll;
+  white-space: nowrap;
+  background: #fef8ee;
+  color: #11222e80;
+  // display: flex;
+  font-size: 14px;
+  .box {
+    margin-left: 16px;
+    display: inline-block;
+  }
+  .box.active {
+    background: #da950c;
+    border-radius: 6px;
+
+    p {
+      margin-block: 2px;
+      padding: 2px 4px;
+      color: #fff;
+    }
+  }
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
 swiper-container {
   width: 100%;
   //   height: 100%;
   direction: ltr;
-
+  max-height: 200px;
+  overflow: hidden;
   //   padding-inline-start: 14px;
   --swiper-pagination-bullet-inactive-color: var(--ion-color-step-200, #cccccc);
   --swiper-pagination-color: var(--ion-color-primary, #3880ff);
@@ -56,7 +111,7 @@ swiper-slide {
 
   width: 100%;
   height: 100%;
-
+  max-height: 200px;
   font-size: 18px;
 
   text-align: center;
@@ -67,8 +122,9 @@ swiper-slide img {
   width: auto;
   width: 100%;
   height: auto;
-  max-height: 100%;
-  object-fit: fill;
+
+  object-fit: cover;
+  max-height: 200px;
 }
 .adds {
   background: linear-gradient(
@@ -102,7 +158,7 @@ swiper-slide img {
 }
 
 .title {
-  padding: 8px 0px;
+  padding: 8px 16px;
   @include flex(space-between, center, 0);
   h2 {
     @include text(var(--dark-text), 20, "bold", 38);
@@ -150,6 +206,10 @@ swiper-slide img {
   white-space: nowrap;
   padding-inline-start: 16px;
   padding-inline-end: 4px;
+  padding-block: 16px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
   .product {
     position: relative;
     display: inline-block;
@@ -157,7 +217,7 @@ swiper-slide img {
     border: 1px solid #f3f4f5;
     border-radius: 8px;
     // @include size(156, 275);
-    height: 300px;
+    height: 290px;
     width: 156px;
     padding: 3px 8px 0;
     .img {
@@ -170,6 +230,9 @@ swiper-slide img {
       margin-bottom: 8px;
     }
     .text {
+      .note {
+        height: 44px;
+      }
       .note p {
         // @include text(var(--dark-text), 12, "regular", 22);
         display: -webkit-box;
@@ -183,6 +246,8 @@ swiper-slide img {
       }
       .name {
         font-family: "bold";
+        margin: 0;
+        font-size: 14px;
       }
 
       .price {
@@ -252,4 +317,39 @@ swiper-slide img {
   &::-webkit-scrollbar {
     display: none;
   }
+}
+.btn {
+  height: 40px;
+  @include flex(space-between, center, 0);
+  div {
+    color: var(--ion-color-primary);
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    ion-img {
+      @include size(40, 40);
+    }
+    &.white {
+      color: rgb(244, 231, 215);
+    }
+  }
+  span {
+    @include text(var(--dark-text), 20, "bold", 38);
+  }
+}
+.loading-slide {
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+}
+.next {
+  height: 290px;
+  border: 1px dashed #eee !important;
+  width: 156px;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  background: #f9f9f9;
 }

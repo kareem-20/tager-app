@@ -1,3 +1,5 @@
+@import "../../../../shared/mixins.scss";
+
 ion-tab-bar {
   padding-bottom: 10px;
   padding-top: 3px;
@@ -19,7 +21,7 @@ ion-tab-bar {
       }
     }
     ion-badge {
-      // @include text(white,9,'bold',15);
+      @include text(white, 9, "bold", 15);
       font-weight: bold;
       right: 50%;
       top: 1px;

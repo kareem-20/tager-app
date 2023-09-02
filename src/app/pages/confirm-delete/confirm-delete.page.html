@@ -6,11 +6,11 @@
     <div class="head">هل تريد حذف هذا المنتج</div>
     <!--  -->
     <div class="item">
-      <div class="img"><ion-img src="../../../assets/images/home/phto1-1.png"></ion-img></div>
+      <div class="img"><ion-img [src]="item?.IMG_URL"></ion-img></div>
       <div class="content">
         <div class="text">
-          <p>هاتف سمارت 6 ثنائي الشريحة بذاكرة رام سعة </p>
-          <h2>{{352342 |number}}<span>د.ع</span></h2>
+          <p>{{item.ITEM_NAME}}</p>
+          <h2>{{item.PRICE_SALE_1 |number}}<span>د.ع</span></h2>
         </div>
       </div>
     </div>

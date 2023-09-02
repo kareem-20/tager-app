@@ -20,7 +20,7 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'products',
+    path: 'products/:id',
     loadChildren: () =>
       import('./pages/products/products.module').then(
         (m) => m.ProductsPageModule
@@ -83,7 +83,46 @@ const routes: Routes = [
   },
   {
     path: 'profile',
-    loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)
+    loadChildren: () =>
+      import('./pages/profile/profile.module').then((m) => m.ProfilePageModule),
+  },
+  {
+    path: 'clients',
+    loadChildren: () =>
+      import('./pages/clients/clients.module').then((m) => m.ClientsPageModule),
+  },
+  {
+    path: 'add-client',
+    loadChildren: () =>
+      import('./pages/add-client/add-client.module').then(
+        (m) => m.AddClientPageModule
+      ),
+  },
+  {
+    path: 'send-order',
+    loadChildren: () =>
+      import('./pages/send-order/send-order.module').then(
+        (m) => m.SendOrderPageModule
+      ),
+  },
+  {
+    path: 'order-details/:id',
+    loadChildren: () =>
+      import('./pages/order-details/order-details.module').then(
+        (m) => m.OrderDetailsPageModule
+      ),
+  },
+  {
+    path: 'notification',
+    loadChildren: () => import('./pages/notification/notification.module').then( m => m.NotificationPageModule)
+  },
+  {
+    path: 'help',
+    loadChildren: () => import('./pages/help/help.module').then( m => m.HelpPageModule)
+  },
+  {
+    path: 'info',
+    loadChildren: () => import('./pages/info/info.module').then( m => m.InfoPageModule)
   },
 ];
 

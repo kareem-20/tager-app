@@ -2,15 +2,15 @@ import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'app.tager.com',
-  appName: 'tager-app',
+  appName: 'منصة تاجر',
   webDir: 'www',
   server: {
     cleartext: true,
     allowNavigation: ['*'],
   },
   plugins: {
-    SplashScreen: {
-      launchAutoHide: false,
+    PushNotifications: {
+      presentationOptions: ['badge', 'sound', 'alert'],
     },
   },
 };
