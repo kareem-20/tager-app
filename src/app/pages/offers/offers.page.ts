@@ -58,7 +58,7 @@ export class OffersPage implements OnInit {
   }
   details(prod: any) {
     this.dataService.setParams({ ...this.dataService.params, prod });
-    this.navCtrl.navigateForward('/tabs/pages/product-details');
+    this.navCtrl.navigateForward('product-details');
   }
   showContent(ev?: any) {
     this.loading = false;

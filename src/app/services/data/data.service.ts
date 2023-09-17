@@ -23,7 +23,9 @@ export class DataService {
   getMongoData(endPoint: string) {
     return this.http.get(this.baseMongoUrl + endPoint).pipe(take(1));
   }
-
+  postMongoData(endPoint: string, body: any) {
+    return this.http.post(this.baseMongoUrl + endPoint, body).pipe(take(1));
+  }
   getData(endPoint: string) {
     return this.http.get(this.baseUrl + endPoint).pipe(take(1));
   }

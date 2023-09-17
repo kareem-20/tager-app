@@ -12,6 +12,11 @@ const config: CapacitorConfig = {
     PushNotifications: {
       presentationOptions: ['badge', 'sound', 'alert'],
     },
+    Filesystem: {
+      web: {
+        enabled: true,
+      },
+    },
   },
 };
 

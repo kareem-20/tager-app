@@ -20,18 +20,29 @@
 
           <swiper-slide *ngFor="let img of photos">
             <img [src]="img?.IMAGE_PATH_ONLINE" />
+            <div class="download" (click)="showActionSheet(img?.IMAGE_PATH_ONLINE)">
+              <!-- <a href="{{img?.IMAGE_PATH_ONLINE}}" download="{{img?.IMAGE_PATH_ONLINE}}"> -->
+              <ion-icon name="download-outline">
+              </ion-icon>
+              <!-- </a> -->
+            </div>
           </swiper-slide>
 
         </swiper-container>
-        <div class="fav">
+        <!-- <div class="fav">
           <ion-img src="../../../assets/images/home/like.svg"></ion-img>
-          <!-- <ion-img src="../../../assets/images/like_act.svg"></ion-img> -->
-        </div>
+        </div> -->
+
       </div>
       <!--  -->
       <h2 class="head">{{product?.ITEM_NAME}}</h2>
       <!--  -->
-      <p class="description">{{product?.ITEM_NOTE}}</p>
+      <p class="description">{{product?.ITEM_NOTE}}
+
+        <ion-button slot="end" fill="clear" (click)="copy()">
+          <ion-icon name="copy-outline"></ion-icon>
+        </ion-button>
+      </p>
       <!--  -->
       <!-- <div class="descount">
         <div class="percent">% <span>15</span>خصم</div>
@@ -41,6 +52,10 @@
       <div class="price">
         <!-- <span>سعر الشراء :</span> -->
         <span>{{product?.PRICE_SALE_1 |number}} <span>د.ع</span></span>
+        <span class="share" (click)="share()">
+          مشاركة
+          <img src="../../../assets/Icon awesome-angle-double-left.svg" alt="">
+        </span>
       </div>
       <div class="customer-price">
         <!-- <h2>سعر الزبون :</h2> -->
@@ -91,6 +106,7 @@
           <p class="name">{{product?.ITEM_NAME}}</p>
           <div class="note">
             <p>{{product?.ITEM_NOTE}} </p>
+
           </div>
           <div class="price">
             <p>سعر الجملة</p>

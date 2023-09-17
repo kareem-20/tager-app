@@ -4,8 +4,11 @@ import { NavController } from '@ionic/angular';
 import { Storage } from '@ionic/storage-angular';
 import { from } from 'rxjs';
 import { FunctionsService } from '../functions/functions.service';
+import { FcmService } from '../fcm/fcm.service';
 
 const USER = 'user';
+const MONGO_USER = 'user-mongo';
+
 const ACCESS_TOKEN = 'accessToken';
 const REFRESH_TOKEN = 'refreshToken';
 @Injectable({
@@ -13,10 +16,12 @@ const REFRESH_TOKEN = 'refreshToken';
 })
 export class AuthService {
   userData: any;
+  userMongoData: any;
   constructor(
     private dataService: DataService,
     private functionService: FunctionsService,
     private storage: Storage,
+    private fcm: FcmService,
     private navCtrl: NavController
   ) {}
 
@@ -27,6 +32,7 @@ export class AuthService {
   async removeCredentials() {
     localStorage.removeItem(ACCESS_TOKEN);
     return await Promise.all([
+      this.storage.remove(MONGO_USER),
       this.storage.remove(USER),
       this.storage.remove(REFRESH_TOKEN),
     ]);
@@ -48,12 +54,18 @@ export class AuthService {
 
   async login(body: any) {
     await this.functionService.showLoading();
-    this.dataService.postData('/user/login', body).subscribe(
+    this.dataService.postMongoData('/user/login', body).subscribe(
       async (user: any) => {
-        await this.storage.set(USER, user);
+        this.userMongoData = await this.storage.set(MONGO_USER, user);
+        this.fcm.user = this.userMongoData;
+        this.fcm.notificationsOne();
+
         await this.storage.set(REFRESH_TOKEN, user.refreshToken);
         localStorage.setItem(ACCESS_TOKEN, user.accessToken);
         this.functionService.dismissLoading();
+        if (this.userMongoData.code)
+          this.loginWithBinCode({ PIN_CODE: this.userMongoData.code });
+        else this.navCtrl.navigateRoot('pending');
       },
       (err) => {
         this.functionService.dismissLoading();
@@ -71,8 +83,39 @@ export class AuthService {
     );
   }
 
+  async register(body: any) {
+    await this.functionService.showLoading();
+    this.dataService.postMongoData('/user/register', body).subscribe(
+      async (user: any) => {
+        this.userMongoData = await this.storage.set(MONGO_USER, user);
+        console.log(user);
+        this.fcm.user = this.userMongoData;
+        this.fcm.notificationsOne();
+        await this.storage.set(REFRESH_TOKEN, user.refreshToken);
+        localStorage.setItem(ACCESS_TOKEN, user.accessToken);
+        this.navCtrl.navigateRoot('pending');
+        this.functionService.dismissLoading();
+      },
+      (err) => {
+        this.functionService.dismissLoading();
+        if (err.status == 404)
+          return this.functionService.presentToast(
+            'خطأ باسم المستخدم او كلمة المرور'
+          );
+        if (err.status == 409)
+          return this.functionService.presentToast('اسم المستخدم موجود مسبقا');
+        if (err.status == 403)
+          return this.functionService.presentToast(
+            'لقد تم تعطيل حسابك برجاء التواصل مع الشركة'
+          );
+        return this.functionService.presentToast('خطأ بالشبكة');
+      }
+    );
+  }
+
   async loginWithBinCode(body: any) {
-    this.functionService.showLoading();
+    await this.functionService.showLoading();
+
     this.dataService.postData('/api/t_mandoob/login', body).subscribe(
       async (user: any) => {
         if (user.data[0]) {
@@ -106,14 +149,21 @@ export class AuthService {
     this.navCtrl.navigateRoot('/login');
   }
 
+  async logOutMongo() {
+    await this.storage.remove(MONGO_USER);
+    await this.fcm.unsubscribeOne();
+    this.navCtrl.navigateRoot('login');
+  }
   userStatus() {
-    this.dataService.getData(`/status`).subscribe(async (res: any) => {
-      if (res.active) {
-        await this.storage.set('user', res?.user);
-        return;
-      }
-      this.functionService.presentToast(res.message);
-      this.logOut();
-    });
+    this.dataService
+      .getMongoData(`/user/status/${this.userMongoData._id}`)
+      .subscribe(async (res: any) => {
+        this.userMongoData = await this.storage.set(MONGO_USER, res);
+        if (res.code) {
+          this.loginWithBinCode({ PIN_CODE: res.code });
+        } else {
+          this.navCtrl.navigateRoot('pending');
+        }
+      });
   }
 }

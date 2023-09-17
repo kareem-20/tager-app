@@ -6,6 +6,7 @@ import { Platform, NavController, AlertController } from '@ionic/angular';
 import { CartService } from './services/cart/cart.service';
 import { Style } from '@capacitor/status-bar';
 import { AuthService } from './services/auth/auth.service';
+import { FcmService } from './services/fcm/fcm.service';
 
 register();
 @Component({
@@ -20,6 +21,8 @@ export class AppComponent {
     private storage: Storage,
     private cartService: CartService,
     private authService: AuthService,
+    private fcmService: FcmService,
+
     private navCtrl: NavController
   ) {
     this.initApp();
@@ -29,6 +32,8 @@ export class AppComponent {
     await this.platform.ready();
     await this.functionsService.setStatusBar(Style.Light, '#ffffff', false);
     await this.storage.create();
+    await this.fcmService.initPush();
+
     await this.cartService.reloadCart();
     await this.checkUser();
     // await SplashScreen.hide();
@@ -36,8 +41,14 @@ export class AppComponent {
 
   async checkUser() {
     this.authService.userData = await this.storage.get('user');
-    this.authService.userData
-      ? this.navCtrl.navigateRoot('/tabs/home')
-      : this.navCtrl.navigateRoot('login');
+    this.authService.userMongoData = await this.storage.get('user-mongo');
+    if (this.authService.userMongoData) {
+      this.authService.userStatus();
+      // if (this.authService.userData) {
+      //   this.navCtrl.navigateRoot('/tabs/home');
+      // } else {
+      //   this.navCtrl.navigateRoot('pending');
+      // }
+    } else this.navCtrl.navigateRoot('login');
   }
 }

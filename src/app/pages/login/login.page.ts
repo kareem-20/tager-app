@@ -10,11 +10,21 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 })
 export class LoginPage implements OnInit {
   type = 'password';
+  form: FormGroup;
   constructor(
     private authService: AuthService,
+    private navCtrl: NavController,
+    private fb: FormBuilder,
     private alertCtrl: AlertController
-  ) {}
-
+  ) {
+    this.createForm();
+  }
+  createForm() {
+    this.form = this.fb.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required],
+    });
+  }
   ngOnInit() {}
 
   async showAlert() {
@@ -44,5 +54,17 @@ export class LoginPage implements OnInit {
       ],
     });
     await alert.present();
+  }
+
+  toggoleType() {
+    this.type == 'password' ? (this.type = 'text') : (this.type = 'password');
+    console.log(this.type);
+  }
+
+  submit() {
+    this.authService.login(this.form.value);
+  }
+  nav(route) {
+    this.navCtrl.navigateForward(route);
   }
 }

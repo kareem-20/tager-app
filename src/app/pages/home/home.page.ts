@@ -1,4 +1,12 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnInit,
+  QueryList,
+  ViewChild,
+  ViewChildren,
+} from '@angular/core';
 import Swiper from 'swiper';
 import SwiperCore, { Autoplay, Keyboard, Pagination } from 'swiper';
 import { IonicSlides, NavController } from '@ionic/angular';
@@ -14,7 +22,7 @@ SwiperCore.use([Autoplay, Pagination, Keyboard, IonicSlides]);
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
 })
-export class HomePage implements OnInit {
+export class HomePage implements OnInit, AfterViewInit {
   slides: any[] = [];
   categories: any[] = [];
   products: any[] = [];
@@ -39,6 +47,11 @@ export class HomePage implements OnInit {
   categoryProductLoading: boolean = true;
   categoryProductEmpty: boolean = false;
   maxPageCategory: number;
+
+  /// Intersection Observer vars
+  @ViewChildren('theLastItem', { read: ElementRef })
+  theLastItem: QueryList<ElementRef>;
+  observer: any;
   constructor(
     private navCtrl: NavController,
     private dataService: DataService,
@@ -50,7 +63,7 @@ export class HomePage implements OnInit {
     this.watchCart();
     this.getAllData();
     this.getItems();
-
+    this.intersectionObserver();
     // this.getAllProduct();
     this.eventSubscription = this.functionsService
       .onChangeEvent()
@@ -61,6 +74,31 @@ export class HomePage implements OnInit {
         }
       });
     this.autoplay();
+  }
+  ngAfterViewInit(): void {
+    console.log(this.theLastItem);
+    this.theLastItem.changes.subscribe((d) => {
+      console.log(this.observer);
+
+      if (d.last) this.observer.observe(d.last.nativeElement);
+    });
+  }
+  intersectionObserver() {
+    let options = {
+      root: document.querySelector('#scrollArea'),
+      rootMargin: '0px',
+      threshold: 0.5,
+    };
+
+    this.observer = new IntersectionObserver((entries) => {
+      if (
+        entries[0].isIntersecting &&
+        this.maxPageCategory > this.skipCategoryProducts
+      ) {
+        console.log('scroll More ...');
+        this.loadCategoryData();
+      }
+    }, options);
   }
 
   swiperReady() {
@@ -93,7 +131,11 @@ export class HomePage implements OnInit {
         this.activeCat = this.categories[0].CATEGORY_CODE;
         // this.categoryProducts = res[2].data.items;
         this.add = res[3].text;
-        this.getCategoryProducts();
+        if (
+          this.maxPageCategory > this.skipCategoryProducts ||
+          this.skipCategoryProducts == 1
+        )
+          this.getCategoryProducts();
         this.checkItemsCart(this.categoryProducts);
         this.checkItemsCart(this.products);
         this.checkItemsFav([...this.categoryProducts, ...this.products]);

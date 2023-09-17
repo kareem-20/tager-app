@@ -1,4 +1,4 @@
-<!-- <ion-content>
+<ion-content>
   <div class="container">
     <div class="logo">
       <img src="../../../assets/images/logo.png" alt="">
@@ -14,15 +14,16 @@
       <ion-item lines="none">
         <img src="../../../assets/images/pass.svg" alt="">
         <ion-input formControlName="password" [type]="type" placeholder="ادخل كلمة المرور"></ion-input>
+
         <ion-icon (click)="toggoleType()" name="eye-{{type=='password'? '':'off-'}}outline"></ion-icon>
 
       </ion-item>
-      <ion-button mode="ios" (click)="nav('tabs/home')" expand="block">تسجيل الدخول</ion-button>
+      <ion-button mode="ios" (click)="submit()" expand="block">تسجيل الدخول</ion-button>
       <p class="register" (click)="nav('register')">إنشاء حساب</p>
     </form>
   </div>
-</ion-content> -->
-
+</ion-content>
+<!-- 
 <div class="loginPage">
   <div class="content">
     <ion-icon name="happy-outline"></ion-icon>
@@ -33,4 +34,4 @@
       </ion-button>
     </ion-text>
   </div>
-</div>
+</div> -->

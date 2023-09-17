@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  {
-    path: '',
-    redirectTo: 'login',
-    pathMatch: 'full',
-  },
+  // {
+  //   path: '',
+  //   redirectTo: 'login',
+  //   pathMatch: 'full',
+  // },
   {
     path: 'login',
     loadChildren: () =>
@@ -114,15 +114,24 @@ const routes: Routes = [
   },
   {
     path: 'notification',
-    loadChildren: () => import('./pages/notification/notification.module').then( m => m.NotificationPageModule)
+    loadChildren: () =>
+      import('./pages/notification/notification.module').then(
+        (m) => m.NotificationPageModule
+      ),
   },
   {
     path: 'help',
-    loadChildren: () => import('./pages/help/help.module').then( m => m.HelpPageModule)
+    loadChildren: () =>
+      import('./pages/help/help.module').then((m) => m.HelpPageModule),
   },
   {
     path: 'info',
-    loadChildren: () => import('./pages/info/info.module').then( m => m.InfoPageModule)
+    loadChildren: () =>
+      import('./pages/info/info.module').then((m) => m.InfoPageModule),
+  },
+  {
+    path: 'pending',
+    loadChildren: () => import('./pages/pending/pending.module').then( m => m.PendingPageModule)
   },
 ];
 

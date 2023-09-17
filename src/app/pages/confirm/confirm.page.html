@@ -47,10 +47,10 @@
 
 
         <div class="note"
-          *ngIf="item.price > item.SELL_W || item.price < item.SELL_G && item.price != null && !item.gift">
+          *ngIf="item.price > item.PRICE_SALE_3 || item.price < item.PRICE_SALE_2 && item.price != null && !item.gift">
           <span>يجب
             إدخال سعر أعلى من
-            الحد الأدنى و أقل من الحد الأعلى </span>
+            {{item.PRICE_SALE_2??'الحد الأدنى'}} و أقل من {{item.PRICE_SALE_3??'الحد الأعلى'}} </span>
         </div>
 
       </div>

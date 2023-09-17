@@ -1,7 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { ActionSheetController, NavController } from '@ionic/angular';
 import { CartService } from 'src/app/services/cart/cart.service';
 import { DataService } from 'src/app/services/data/data.service';
+import { Share } from '@capacitor/share';
+
+import { WritefileService } from 'src/app/services/writefile/writefile.service';
+import { FunctionsService } from 'src/app/services/functions/functions.service';
+import { ShareService } from 'src/app/services/share/share.service';
+import { Clipboard } from '@capacitor/clipboard';
+import { Media, MediaSaveOptions } from '@capacitor-community/media';
 
 @Component({
   selector: 'app-product-details',
@@ -20,6 +27,10 @@ export class ProductDetailsPage implements OnInit {
   constructor(
     private navCtrl: NavController,
     private dataService: DataService,
+    private writeFileService: WritefileService,
+    private functionsService: FunctionsService,
+    private actionCtrl: ActionSheetController,
+    private shareService: ShareService,
     private cartService: CartService
   ) {}
 
@@ -95,5 +106,118 @@ export class ProductDetailsPage implements OnInit {
   }
   back() {
     this.navCtrl.back();
+  }
+
+  async share() {
+    await Share.share({
+      url: this.product?.IMG_URL,
+      title: this.product?.ITEM_NAME,
+      text: this.product?.ITEM_NOTE,
+    }).catch((reason) => {
+      console.log(reason);
+    });
+  }
+
+  async showActionSheet(img) {
+    const action = await this.actionCtrl.create({
+      header: 'حفظ',
+      mode: 'ios',
+      buttons: [
+        {
+          text: 'حفظ صورة واحدة',
+          handler: async () => {
+            // await this.downloadImage(img);
+            // this.generateImage();
+            // await saveAs.saveAs(img, 'image.jpg');\
+            await this.downloadImage(img);
+          },
+        },
+        {
+          text: 'حفظ كل الصور',
+          handler: () => {
+            this.saveAllImg();
+          },
+        },
+        {
+          text: 'الغاء',
+          role: 'cancel',
+        },
+      ],
+    });
+    await action.present();
+  }
+
+  async downloadImage(imageUrl) {
+    // const response = await fetch(
+    //   `http://209.250.237.58:5640/proxy${
+    //     imageUrl.split('https://gssc.esa.int')[1]
+    //   }`
+    // );
+    // convert to a Blob
+    // const blob = await response.blob();
+    // convert to base64 data, which the Filesystem plugin requires
+    // const base64Data = (await this.convertBlobToBase64(blob)) as string;
+    let albums = (await Media.getAlbums()).albums;
+    let downloadFolder = albums.find((item) => item.name.includes('Download'));
+
+    let opt: MediaSaveOptions = {
+      path: `http://209.250.237.58:5640/proxy${
+        imageUrl.split('https://gssc.esa.int')[1]
+      }`,
+      albumIdentifier: downloadFolder.identifier,
+    };
+    await Media.savePhoto(opt)
+      .then((res) => {
+        console.log('then ==>', res);
+        this.functionsService.presentToast('تم الحفظ');
+      })
+      .catch((err) => {
+        console.log('err ==>', err);
+        this.functionsService.presentToast('خطأ بالحفظ');
+      });
+  }
+  async saveAllImg() {
+    let promises: any[] = [];
+
+    let albums = (await Media.getAlbums()).albums;
+    let downloadFolder = albums.find((item) => item.name.includes('Download'));
+
+    this.photos.forEach((img) => {
+      let opt = {
+        path: `http://209.250.237.58:5640/proxy${
+          img.IMAGE_PATH_ONLINE.split('https://gssc.esa.int')[1]
+        }`,
+        albumIdentifier: downloadFolder.identifier,
+      };
+
+      promises.push(Media.savePhoto(opt));
+    });
+
+    await Promise.all(promises)
+      .then((res) => {
+        console.log('then ==>', res);
+        this.functionsService.presentToast('تم الحفظ');
+      })
+      .catch((err) => {
+        console.log('err ==>', err);
+        this.functionsService.presentToast('خطأ بالحفظ');
+      });
+  }
+  convertBlobToBase64 = (blob: Blob) =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onerror = reject;
+      reader.onload = () => {
+        resolve(reader.result);
+      };
+      reader.readAsDataURL(blob);
+    });
+
+  async copy() {
+    await Clipboard.write({
+      string: this.product?.ITEM_NOTE,
+    }).then((val) => {
+      this.functionsService.presentToast('تم نسخ مواصفات المنتج');
+    });
   }
 }
