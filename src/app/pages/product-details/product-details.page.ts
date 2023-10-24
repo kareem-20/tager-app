@@ -125,11 +125,11 @@ export class ProductDetailsPage implements OnInit {
       buttons: [
         {
           text: 'حفظ صورة واحدة',
-          handler: async () => {
+          handler: () => {
             // await this.downloadImage(img);
             // this.generateImage();
             // await saveAs.saveAs(img, 'image.jpg');\
-            await this.downloadImage(img);
+            this.downloadImage(img);
           },
         },
         {
@@ -158,7 +158,12 @@ export class ProductDetailsPage implements OnInit {
     // convert to base64 data, which the Filesystem plugin requires
     // const base64Data = (await this.convertBlobToBase64(blob)) as string;
     let albums = (await Media.getAlbums()).albums;
-    let downloadFolder = albums.find((item) => item.name.includes('Download'));
+    let exsistFolder = albums.find((item) => item.name.includes('tager'));
+    if (!exsistFolder) await Media.createAlbum({ name: 'tager' });
+    let albumsafter = (await Media.getAlbums()).albums;
+    let downloadFolder = albumsafter.find((item) =>
+      item.name.includes('tager')
+    );
 
     let opt: MediaSaveOptions = {
       path: `http://209.250.237.58:5640/proxy${
@@ -180,7 +185,12 @@ export class ProductDetailsPage implements OnInit {
     let promises: any[] = [];
 
     let albums = (await Media.getAlbums()).albums;
-    let downloadFolder = albums.find((item) => item.name.includes('Download'));
+    let exsistFolder = albums.find((item) => item.name.includes('tager'));
+    if (!exsistFolder) await Media.createAlbum({ name: 'tager' });
+    let albumsafter = (await Media.getAlbums()).albums;
+    let downloadFolder = albumsafter.find((item) =>
+      item.name.includes('tager')
+    );
 
     this.photos.forEach((img) => {
       let opt = {

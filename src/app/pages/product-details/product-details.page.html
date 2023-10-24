@@ -21,10 +21,8 @@
           <swiper-slide *ngFor="let img of photos">
             <img [src]="img?.IMAGE_PATH_ONLINE" />
             <div class="download" (click)="showActionSheet(img?.IMAGE_PATH_ONLINE)">
-              <!-- <a href="{{img?.IMAGE_PATH_ONLINE}}" download="{{img?.IMAGE_PATH_ONLINE}}"> -->
               <ion-icon name="download-outline">
               </ion-icon>
-              <!-- </a> -->
             </div>
           </swiper-slide>
 

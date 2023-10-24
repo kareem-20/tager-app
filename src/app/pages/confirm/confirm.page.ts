@@ -32,6 +32,7 @@ export class ConfirmPage implements OnInit {
       (i, j) => i + j.QTY * j.PRICE_SALE_1,
       0
     );
+    this.calcTotal();
   }
   back() {
     this.navCtrl.pop();

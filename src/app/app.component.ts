@@ -33,10 +33,10 @@ export class AppComponent {
     await this.functionsService.setStatusBar(Style.Light, '#ffffff', false);
     await this.storage.create();
     await this.fcmService.initPush();
-
     await this.cartService.reloadCart();
+    await this.authService.getSettings();
+
     await this.checkUser();
-    // await SplashScreen.hide();
   }
 
   async checkUser() {

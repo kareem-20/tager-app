@@ -32,7 +32,7 @@ export class HomePage implements OnInit, AfterViewInit {
   cartCount: number = 0;
   search_txt: string = '';
   skip: number = 1;
-  activeCat: any;
+  activeCat: any = null;
   eventSubscription: Subscription;
   searchList: any = [];
   searchQuery: any;
@@ -128,7 +128,7 @@ export class HomePage implements OnInit, AfterViewInit {
         this.slides = res[0].data;
         this.categories = res[1].data;
         this.products = res[2].data.items;
-        this.activeCat = this.categories[0].CATEGORY_CODE;
+        // this.activeCat = this.categories[0].CATEGORY_CODE;
         // this.categoryProducts = res[2].data.items;
         this.add = res[3].text;
         if (
@@ -169,7 +169,9 @@ export class HomePage implements OnInit, AfterViewInit {
     });
   }
   get endPointCategory(): string {
-    let url = `/api/item/get-paginate?cat_id=${this.activeCat}&page=${this.skipCategoryProducts}`;
+    //'/api/item/get-paginate?page=1&is_feat=true'
+    let url = `/api/item/get-paginate?page=${this.skipCategoryProducts}`;
+    if (this.activeCat != null) url += `&cat_id=${this.activeCat}`;
     return url;
   }
 

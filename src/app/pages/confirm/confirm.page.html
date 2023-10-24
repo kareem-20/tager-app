@@ -11,7 +11,7 @@
 <ion-content>
 
   <div class="container animate__animated animate__fadeIn">
-    <div class="title">أدخل سعر الذبون</div>
+    <div class="title">أدخل سعر الزبون</div>
 
     <div class="items">
 
@@ -38,13 +38,12 @@
           mode="md" lines="none">
           <ion-input [disabled]="item.gift" type="number" [(ngModel)]="item.price"
             (ngModelChange)="calcTotal();checkValid()"
-            placeholder="أكتب السعر هنا لا يكون اقل من {{item.PRICE_SALE_2 |number}} د.ع ولا يكون أكبر من {{item.PRICE_SALE_3 |number}} د.ع"></ion-input>
+            placeholder="نطاق السعر ( {{item.PRICE_SALE_2 |number}} - {{item.PRICE_SALE_3 |number}})"></ion-input>
           <div slot="end">
             <div class="qty">{{item.QTY}}x</div>
             <div *ngIf="item.price " class="total">{{item.price*item.QTY | number}}<span>د.ع</span></div>
           </div>
         </ion-item>
-
 
         <div class="note"
           *ngIf="item.price > item.PRICE_SALE_3 || item.price < item.PRICE_SALE_2 && item.price != null && !item.gift">
@@ -52,6 +51,7 @@
             إدخال سعر أعلى من
             {{item.PRICE_SALE_2??'الحد الأدنى'}} و أقل من {{item.PRICE_SALE_3??'الحد الأعلى'}} </span>
         </div>
+
 
       </div>
 

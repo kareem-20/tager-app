@@ -41,6 +41,8 @@ export class SendOrderPage implements OnInit {
     this.selectedZone = this.dataService.params.selectedZone;
 
     console.log(this.dataService.params);
+    console.log(this.createBody());
+
   }
 
   back() {
@@ -90,7 +92,7 @@ export class SendOrderPage implements OnInit {
       client_name: `${this.client.RECEVER_NAME}`,
       client_phone: `${this.client.PHONE_1}`,
       client_address: `${this.client.ADDRESS}`,
-      branch: 'leo',
+      branch: 'SP',
       b_name: 'b_name',
       userId: this.authService.userData?.ACCOUNT_CODE,
     };

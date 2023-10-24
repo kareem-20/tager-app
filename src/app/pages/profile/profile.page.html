@@ -10,8 +10,17 @@
 
 <ion-content>
   <div class="image">
-    <img src="../../../assets/images/Ellipse 18.png" alt="">
-    <p>محمد علاء سعفان</p>
+    <div class="profile-img">
+      <div class="pic">
+
+        <img [lazyLoad]="image?.data || userData?.image ||'../../../assets/images/userplaceholder.png'"
+          [errorImage]="'../../../assets/images/userplaceholder.png'" alt="">
+      </div>
+      <div class="edit" (click)="selectImage()">
+        <img src="../../../assets/images/edit.svg" alt="">
+      </div>
+    </div>
+    <p>{{userData?.displayName ??'....'}}</p>
   </div>
 
   <div class="info">
@@ -20,23 +29,24 @@
         رقم الهاتف
       </p>
       <p class="end">
-        +964 773 228 4555
+        {{userData?.phone}}
       </p>
     </div>
     <div class="line">
       <p class="start">
-        العنوان
+        كود التفعيل
       </p>
       <p class="end">
-        بغداد - شارع البر بجوار صيدلية علي
+        {{userData?.code}}
       </p>
     </div>
+    <ion-button class="ion-margin-bottom" expand="block" color="primary" fill="solid" (click)="submit()">
+      <!-- <img src="../../../assets/images/Icon feather-user-x.svg"> -->
+      حفظ
+    </ion-button>
     <ion-button expand="block" color="danger" fill="outline">
       <img src="../../../assets/images/Icon feather-user-x.svg">
-
-
       حذف الحساب
-
     </ion-button>
   </div>
 </ion-content>

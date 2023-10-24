@@ -1,3 +1,5 @@
+@import "../../../../shared/mixins.scss";
+
 ion-header::after {
   display: none;
   --box-shadow: 0;
@@ -55,5 +57,43 @@ form {
     font-family: "bold";
     font-size: 15px;
     margin-top: 30px;
+  }
+}
+ion-modal {
+  ion-header {
+    ion-toolbar {
+      ion-label {
+        @include text(var(--dark-text), 20, "bold", 38);
+      }
+      .end {
+        position: relative;
+        overflow: hidden;
+        color: var(--light-text);
+        @include flex(center, center, 0);
+        @include size(32, 32);
+        border-radius: 50%;
+        border: 1px solid #f3f4f5;
+      }
+    }
+  }
+  p {
+    color: var(--dark-color);
+    font-size: 16px;
+    font-family: "semi-bold";
+  }
+  ion-item {
+    border: 1px solid #87899e;
+    border-radius: 12px;
+    margin: 12px 0 24px;
+    --inner-padding-top: 0;
+
+    ion-input {
+      --padding-bottom: 0;
+      --padding-top: 0;
+    }
+  }
+  ion-button {
+    color: #fff;
+    font-family: "bold";
   }
 }

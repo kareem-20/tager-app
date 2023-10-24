@@ -17,6 +17,8 @@ const REFRESH_TOKEN = 'refreshToken';
 export class AuthService {
   userData: any;
   userMongoData: any;
+  settings: any;
+
   constructor(
     private dataService: DataService,
     private functionService: FunctionsService,
@@ -165,5 +167,39 @@ export class AuthService {
           this.navCtrl.navigateRoot('pending');
         }
       });
+  }
+  async updateUser(body: any) {
+    await this.functionService.showLoading();
+    this.dataService
+      .editMongoData(`/user/${this.userMongoData?._id}`, body)
+      .subscribe(
+        async (user: any) => {
+          this.userMongoData = await this.storage.set(MONGO_USER, user);
+          await this.storage.set(REFRESH_TOKEN, user.refreshToken);
+          localStorage.setItem(ACCESS_TOKEN, user.accessToken);
+          this.functionService.presentToast('تم تحديث البيانات بنجاح');
+          this.functionService.dismissLoading();
+          this.navCtrl.navigateForward('/tabs/home');
+        },
+        (err) => {
+          this.functionService.dismissLoading();
+          // if (err.status == 404)
+          //   return this.functionService.presentToast('خطأ برقم الهاتف او كلمة المرور');
+          // if (err.status == 409)
+          //   return this.functionService.presentToast('اسم المستخدم موجود بالفعل ');
+          return this.functionService.presentToast('خطأ بالشبكة');
+        }
+      );
+  }
+  async getSettings() {
+    this.dataService.getMongoData('/settings').subscribe(
+      (res) => {
+        console.log(res);
+        this.settings = res;
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
 }
