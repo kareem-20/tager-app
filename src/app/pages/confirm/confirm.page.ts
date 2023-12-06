@@ -18,6 +18,8 @@ export class ConfirmPage implements OnInit {
   method: number = 0;
   shiping: any[] = [];
   selected: any;
+  paidCash: number = 0;
+
   constructor(
     private navCtrl: NavController,
     private cartService: CartService,
@@ -28,11 +30,15 @@ export class ConfirmPage implements OnInit {
   }
   ionViewWillEnter() {
     this.items = this.cartService.items;
+    this.items.forEach((item) => {
+      if (item.QTY < 0) item.price = item.totalPriceMandob;
+    });
     this.totalPrice = this.items.reduce(
       (i, j) => i + j.QTY * j.PRICE_SALE_1,
       0
     );
     this.calcTotal();
+    this.checkValid();
   }
   back() {
     this.navCtrl.pop();
@@ -78,6 +84,7 @@ export class ConfirmPage implements OnInit {
     this.cartService.totalPrice = this.totalPrice;
     this.cartService.clientPrice = this.clientPrice;
     this.cartService.deliveryCost = this.selected?.REGION_SELL;
+    this.cartService.paidCash = this.paidCash;
     this.dataService.setParams({ selectedZone: this.selected });
     this.navCtrl.navigateForward('/clients');
   }

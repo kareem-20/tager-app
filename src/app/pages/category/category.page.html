@@ -10,7 +10,7 @@
   <ion-toolbar>
     <div class="search">
       <ion-img src="../../../assets/images/category/search.svg"></ion-img>
-      <ion-input placeholder="البحث عن قسم"></ion-input>
+      <ion-input placeholder="البحث عن قسم" [(ngModel)]='search_txt' (ngModelChange)="getCategory()"></ion-input>
     </div>
   </ion-toolbar>
 </ion-header>

@@ -73,4 +73,11 @@ export class BalanceAccountPage implements OnInit {
   back() {
     this.navCtrl.back();
   }
+  countList(body: any) {
+    this.dataService.setParams(body);
+    this.navCtrl.navigateForward(`tabs/count-list/${body[0]}`);
+  }
+  doRefresh(ev: any) {
+    this.getCounts(ev);
+  }
 }

@@ -51,7 +51,7 @@ export class NotificationPage implements OnInit {
   get endPoint() {
     let url = `/fcm/`;
     // ?phone=${this.userData.phone}
-    if (this.skip) url += `&skip=${this.skip}`;
+    if (this.skip) url += `?skip=${this.skip}`;
 
     return url;
   }

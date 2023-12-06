@@ -1,0 +1,69 @@
+<ion-header mode="md">
+  <ion-toolbar>
+    <ion-img (click)="back()" slot="start" src="../../../assets/images/back.png"></ion-img>
+    <ion-label>تفاصيل الفاتورة</ion-label>
+    <!-- <ion-img slot="end" src="../../../assets/imags/speedo/more-b.svg"></ion-img> -->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container">
+    <h1>رقم الفاتورة # {{BILL_NUMBER}}</h1>
+    <div class="head animate__animated animate__fadeIn">
+      <div class="start">({{items.length}}) منتج</div>
+    </div>
+
+
+    <div class="items animate__animated animate__fadeIn">
+      <div class="item" *ngFor="let item of items;let i=index">
+        <div class="img"><ion-img [src]="item?.IMG_URL"></ion-img></div>
+        <div class="content">
+          <div class="text">
+            <p>{{item?.ITEM_NAME}}</p>
+            <h2>{{(item?.TOTAL_MANDOOB_ITEM + item.TOTAL) |number}}<span>د.ع</span></h2>
+            <div class="operations">
+              <!-- <div class="increase ion-activatable">
+                  <ion-img src="../../../assets/images/increase.svg"></ion-img>
+                  <ion-ripple-effect type="bounded"></ion-ripple-effect>
+                </div> -->
+              <!-- الكميه -->
+              <div class="qty">الكميه {{item.QTY}}</div>
+
+              <!-- <div class=" decrease ion-activatable">
+                  <ion-img src="../../../assets/images/decrease.svg"></ion-img>
+                  <ion-ripple-effect type="bounded"></ion-ripple-effect>
+                </div> -->
+            </div>
+          </div>
+          <div class="delete ion-activatable" *ngIf="item.ITEM_CODE != -1" (click)="return(item)">
+            <ion-img src="../../../assets/images/delete.png"></ion-img>
+            <p>استرجاع</p>
+            <ion-ripple-effect type="bounded"></ion-ripple-effect>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="container">
+    <h1># {{BILL_NUMBER}}</h1>
+  </div>
+
+  <table>
+    <tr>
+      <th>اسم المنتج</th>
+      <th>العدد</th>
+      <th>السعر</th>
+      <th>الاجمالي</th>
+    </tr>
+    <tr *ngFor="let item of items">
+      <td>{{item.ITEM_NAME}}</td>
+      <td>{{item.QTY}}</td>
+      <td>{{item.PRICE |number}}</td>
+      <td><strong> {{item.NET_TOTAL |number}} </strong></td>
+    </tr>
+  </table>
+  <div class="myFooter">
+    <h3>عدد المواد : {{items.length}}</h3>
+  </div> -->
+
+</ion-content>

@@ -131,7 +131,36 @@ const routes: Routes = [
   },
   {
     path: 'pending',
-    loadChildren: () => import('./pages/pending/pending.module').then( m => m.PendingPageModule)
+    loadChildren: () =>
+      import('./pages/pending/pending.module').then((m) => m.PendingPageModule),
+  },
+  {
+    path: 'sales-list',
+    loadChildren: () =>
+      import('./pages/sales-list/sales-list.module').then(
+        (m) => m.SalesListPageModule
+      ),
+  },
+  {
+    path: 'bill-details',
+    loadChildren: () =>
+      import('./pages/bill-details/bill-details.module').then(
+        (m) => m.BillDetailsPageModule
+      ),
+  },
+  {
+    path: 'count-list',
+    loadChildren: () =>
+      import('./pages/count-list/count-list.module').then(
+        (m) => m.CountListPageModule
+      ),
+  },
+  {
+    path: 'count-details/:id',
+    loadChildren: () =>
+      import('./pages/count-details/count-details.module').then(
+        (m) => m.CountDetailsPageModule
+      ),
   },
 ];
 

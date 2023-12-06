@@ -15,14 +15,18 @@
       <img src="../../../assets/images/vector_Error _ done.svg" alt="">
     </div>
     <div class="states">
-      <div><span>سعر الزبون الإجمالي</span> <span>{{clientPrice |number}} <span>د.ع</span></span></div>
-      <div><span>سعر الشراء الفعلي</span> <span>{{totalPrice |number}} <span>د.ع</span></span></div>
+      <div><span>سعر الزبون الإجمالي</span> <span>{{clientPrice +selectedZone?.REGION_SELL |number}}
+          <span>د.ع</span></span></div>
+      <div><span>سعر الشراء الفعلي</span> <span>{{totalPrice |number}}
+          <span>د.ع</span></span></div>
       <!-- <div><span>العروض و الخصومات</span> <span>0 <span>د.ع</span></span></div> -->
-      <div><span>الربح</span> <span>{{clientPrice -(totalPrice + selectedZone?.REGION_SELL||0)||0 |number}}
+      <div><span>الربح</span> <span>{{clientPrice -(totalPrice +paidCash||0)|number}}
           <span>د.ع</span></span></div>
       <div><span>كلفة التوصيل</span> <span>{{selectedZone?.REGION_SELL||0 |number}} <span>د.ع</span></span></div>
-      <div><span>مجموع الطلب</span> <span>{{clientPrice +( selectedZone?.REGION_SELL||0)|number}}
-          <span>د.ع</span></span></div>
+      <div><span>اجور توصيل مدفوعة من التاجر</span> <span>{{paidCash||0 |number}} <span>د.ع</span></span></div>
+      <!-- <div><span>صافي اجور التوصيل</span> <span>{{clientPrice -(totalPrice + paidCash +
+          selectedZone?.REGION_SELL||0)|number}}
+          <span>د.ع</span></span></div> -->
     </div>
 
   </div>

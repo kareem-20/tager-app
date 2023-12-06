@@ -8,7 +8,7 @@ import { take } from 'rxjs/operators';
 })
 export class DataService {
   private data: any = {};
-  private baseUrl: string = 'http://api-iraqsoft.com:18365';
+  baseUrl: string = 'http://api-iraqsoft.com:32493';
   // 'http://api-iraqsoft.com:46584';
   change: BehaviorSubject<number> = new BehaviorSubject(0);
   baseMongoUrl: string = 'http://209.250.237.58:5640';

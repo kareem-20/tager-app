@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActionSheetController, NavController } from '@ionic/angular';
 import { CartService } from 'src/app/services/cart/cart.service';
 import { DataService } from 'src/app/services/data/data.service';
@@ -9,6 +9,7 @@ import { FunctionsService } from 'src/app/services/functions/functions.service';
 import { ShareService } from 'src/app/services/share/share.service';
 import { Clipboard } from '@capacitor/clipboard';
 import { Media, MediaSaveOptions } from '@capacitor-community/media';
+import Swiper from 'swiper';
 
 @Component({
   selector: 'app-product-details',
@@ -18,12 +19,24 @@ import { Media, MediaSaveOptions } from '@capacitor-community/media';
 export class ProductDetailsPage implements OnInit {
   products: any[] = [];
   photos: any[] = [];
-  slideOpts = {
-    slidesPerView: 1,
-    autoplay: true,
-  };
+  // slideOpts = {
+  //   slidesPerView: 1,
+  //   autoplay: true,
+  // };
   product: any;
   QTY: number = 1;
+  @ViewChild('swiper')
+  swiperRef: any | undefined;
+  swiper?: Swiper;
+  slideOpts = {
+    // slidesPerView: 1.09,
+    // spaceBetween: 10,
+    // autoplay: true,
+    autoplay: true,
+    slidesPerView: 1,
+    spaceBetween: 12,
+    pagination: true,
+  };
   constructor(
     private navCtrl: NavController,
     private dataService: DataService,
@@ -39,8 +52,12 @@ export class ProductDetailsPage implements OnInit {
     this.product = this.dataService.params.prod;
     this.QTY = this.product.QTY || 1;
     this.getImages(this.product.ITEM_CODE);
-    this.getSimilar(this.product.CATEGORY_CODE);
+    // this.getSimilar(this.product.CATEGORY_CODE);
     console.log(this.product);
+  }
+
+  swiperReady() {
+    this.swiper = this.swiperRef?.nativeElement.swiper;
   }
   getImages(itemCode: number) {
     this.dataService
@@ -48,6 +65,12 @@ export class ProductDetailsPage implements OnInit {
       .subscribe((res: any) => {
         console.log(res);
         this.photos = res.data;
+        setTimeout(() => {
+          const element = this.swiperRef.nativeElement.swiper;
+
+          element.slideTo(1, 600);
+          element?.update();
+        }, 1000);
       });
   }
   increse() {

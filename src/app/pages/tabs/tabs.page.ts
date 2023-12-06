@@ -32,9 +32,11 @@ export class TabsPage implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
-
+  emit() {
+    this.functionService.emitEvent(Events.refreshHome);
+  }
   change(ev) {
     console.log(ev);
-    if (ev.tab == 'home') this.functionService.emitEvent(Events.refreshHome);
+    // if (ev.tab == 'home') this.functionService.emitEvent(Events.refreshHome);
   }
 }

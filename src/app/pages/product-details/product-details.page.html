@@ -15,7 +15,7 @@
   <div class="container animate__animated animate__fadeIn">
     <div class="all">
       <div class="contain">
-        <swiper-container #swiper [slidesPerView]="1" [spaceBetween]="0" [autoplay]="true" [loop]="true"
+        <swiper-container #swiper [slidesPerView]="1" [spaceBetween]="0" [autoplay]="false" [loop]="true"
           direction="horizontal" [pagination]="{clickable:true,dynamicBullets:true}">
 
           <swiper-slide *ngFor="let img of photos">
@@ -35,12 +35,13 @@
       <!--  -->
       <h2 class="head">{{product?.ITEM_NAME}}</h2>
       <!--  -->
-      <p class="description">{{product?.ITEM_NOTE}}
+      <!-- <p class="description">
+        {{product?.ITEM_NOTE}}
 
         <ion-button slot="end" fill="clear" (click)="copy()">
           <ion-icon name="copy-outline"></ion-icon>
         </ion-button>
-      </p>
+      </p> -->
       <!--  -->
       <!-- <div class="descount">
         <div class="percent">% <span>15</span>خصم</div>
@@ -86,9 +87,17 @@
         <ion-button expand="block" *ngIf="product?.addedToCart" (click)="updateQty(product)">تعديل الكمية</ion-button>
       </div>
     </div>
+
     <!--  -->
-    <div class="title">منتجات مشابهة</div>
+    <!-- <div class="title">منتجات مشابهة</div> -->
     <!--  -->
+    <h2 class="title-desc">الوصف</h2>
+    <div class="description">
+      <p [innerHTML]="product?.ITEM_NOTE"></p>
+      <ion-button slot="end" fill="clear" (click)="copy()">
+        <ion-icon name="copy-outline"></ion-icon>
+      </ion-button>
+    </div>
     <div class="products">
       <div class="product" *ngFor="let product of products;let i=index">
         <div class="fav">

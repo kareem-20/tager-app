@@ -10,6 +10,8 @@ const FAV = 'fav';
 export class CartService {
   private clear: boolean = false;
   items: any[] = [];
+  paidCash: number;
+
   public fav: any[] = [];
 
   totalPrice: number;
@@ -97,5 +99,9 @@ export class CartService {
     if (filter[0]) {
       item.favorite = true;
     }
+  }
+  returnItem(item: any) {
+    this.items.push(item);
+    this.saveStorage();
   }
 }

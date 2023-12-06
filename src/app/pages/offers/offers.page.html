@@ -50,7 +50,7 @@
               <span>دع</span>
             </div>
           </div>
-          <ion-button *ngIf="!product?.addedToCart" expand="block" fill="outline">إضافة
+          <ion-button *ngIf="!product?.addedToCart" expand="block" fill="outline" (click)="addItem(product)">إضافة
             للسلة</ion-button>
           <div *ngIf="product?.addedToCart" class="btn">
             <div class="ion-activatable" (click)="decrese(product)">

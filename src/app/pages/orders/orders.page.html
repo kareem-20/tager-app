@@ -12,18 +12,24 @@
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" pullFactor="0.8" pullMin="60" pullMax="120">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
+  <ion-segment mode="ios" [ngModel]="orderStatus" (ionChange)="change($event)">
+    <ion-segment-button [value]="0">
+      <ion-label>انتظار</ion-label>
+    </ion-segment-button>
+    <ion-segment-button [value]="1">
+      <ion-label>قبول</ion-label>
+    </ion-segment-button>
+    <ion-segment-button [value]="2">
+      <ion-label>رفض</ion-label>
+    </ion-segment-button>
+    <ion-segment-button [value]="3">
+      <ion-label>ارجاع</ion-label>
+    </ion-segment-button>
+    <ion-segment-button [value]="4">
+      <ion-label>استبدال</ion-label>
+    </ion-segment-button>
+  </ion-segment>
   <div class="container">
-    <ion-segment mode="ios" [ngModel]="orderStatus" (ionChange)="change($event)">
-      <ion-segment-button [value]="0">
-        <ion-label>انتظار</ion-label>
-      </ion-segment-button>
-      <ion-segment-button [value]="1">
-        <ion-label>قبول</ion-label>
-      </ion-segment-button>
-      <ion-segment-button [value]="2">
-        <ion-label>رفض</ion-label>
-      </ion-segment-button>
-    </ion-segment>
 
 
     <div class="items">

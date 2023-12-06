@@ -46,6 +46,22 @@ swiper-container {
     var(--ion-text-color-rgb, 0, 0, 0),
     0.5
   );
+
+  &::part(bullet) {
+    background-color: white;
+    opacity: 0.6;
+    width: 18px;
+    height: 6px;
+    border-radius: 3px;
+    background: var(--ion-color-primary);
+    opacity: 0.3;
+  }
+  &::part(bullet-active) {
+    width: 18px;
+    height: 6px;
+    border-radius: 3px;
+    background: var(--ion-color-primary);
+  }
 }
 swiper-slide {
   display: flex;
@@ -325,6 +341,31 @@ p.description {
       font-size: 11px;
       //   @include text(var(--dark-text), 11, "regular", 21);
     }
+  }
+}
+
+.title-desc {
+  font-size: 18px;
+  margin-inline-start: 14px;
+  border-bottom: 1px solid;
+  padding-bottom: 6px;
+  display: inline-block;
+}
+
+.description {
+  position: relative;
+  margin-inline: 8px;
+  background: #fef8ee;
+  padding: 10px 8px 50px;
+  border-radius: 14px;
+  ion-button {
+    position: absolute;
+    left: 8px;
+    bottom: 2px;
+    background: #fff;
+    border-radius: 6px;
+    --background: #fff;
+    --border-radius: 6px;
   }
 }
 .share {

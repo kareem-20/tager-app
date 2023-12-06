@@ -1,6 +1,6 @@
 <ion-tabs (ionTabsWillChange)="change($event)">
   <ion-tab-bar slot="bottom,top">
-    <ion-tab-button #tab1 tab="home">
+    <ion-tab-button #tab1 tab="home" (click)="emit()">
       <ion-img src="../../../assets/images/home/home{{tab1.selected?'_act':''}}.svg" alt=""></ion-img>
       <ion-label [class.active]="tab1.selected">الرئيسية</ion-label>
     </ion-tab-button>

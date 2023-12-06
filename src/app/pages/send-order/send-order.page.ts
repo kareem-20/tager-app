@@ -19,6 +19,7 @@ export class SendOrderPage implements OnInit {
   device: any;
   deliveryCost: number;
   selectedZone: any;
+  paidCash: number;
   constructor(
     private navCtrl: NavController,
     private cartService: CartService,
@@ -37,12 +38,12 @@ export class SendOrderPage implements OnInit {
     this.totalPrice = this.cartService.totalPrice;
     this.clientPrice = this.cartService.clientPrice;
     this.client = this.dataService.params.client;
+    this.paidCash = this.cartService.paidCash;
     this.deliveryCost = this.cartService.deliveryCost;
     this.selectedZone = this.dataService.params.selectedZone;
 
     console.log(this.dataService.params);
     console.log(this.createBody());
-
   }
 
   back() {
@@ -57,15 +58,17 @@ export class SendOrderPage implements OnInit {
       date: new Date().toISOString().slice(0, 10),
       time: new Date().toISOString().slice(0, 16),
       info: JSON.stringify({
-        INVOICE_CODE: 1,
-        CLIENT_CODE: this.selectedZone?.CLIENT_CODE,
+        INVOICE_CODE: 6,
+        CLIENT_CODE: 2100001,
         CLIENT_NAME: this.client?.RECEVER_NAME,
         CLIENT_PHONE: this.client?.PHONE_1,
         CLIENT_ADDRESS: this.client?.ADDRESS,
+        CLIENT_ZONE: this.client?.ZONE_NAME,
+        CLIENT_NOTE: this.client?.NOTE,
         MANDOOB_CODE: this.authService.userData.MANDOOB_CODE,
         LAT: '',
         LNG: '',
-        NOTE_ORDER: '',
+        NOTE_ORDER: this.client?.NOTE,
         TOTAL_DISCOUNT: 0,
         TOTAL: this.clientPrice,
         SERVICE: 0,
@@ -84,7 +87,7 @@ export class SendOrderPage implements OnInit {
       b_code: 2,
       bill_giud: 'any GIUD',
       bill_number: 0,
-      bill_branch: 'naser city',
+      bill_branch: this.authService.userData.MANDOOB_CODE,
       user_create: 'online',
       device_id: this.device,
       is_accept: 0,
@@ -110,7 +113,12 @@ export class SendOrderPage implements OnInit {
         UNIT_QTY: item.UNIT_QTY,
         STORE_CODE: item.STORE_CODE,
         PRICE_COST: item.PRICE_COST,
-        PRICE: item?.price,
+        PRICE: item.PRICE_SALE_1,
+        totalPriceMandob: item.totalPriceMandob
+          ? item.totalPriceMandob
+          : item?.price * item.QTY,
+        totalNetProfitMandob:
+          item?.price * item.QTY - item.PRICE_SALE_1 * item.QTY,
         PRICE_SALE_1: item.PRICE_SALE_1,
         PRICE_SALE_2: item.PRICE_SALE_2,
         PRICE_SALE_3: item.PRICE_SALE_3,
@@ -121,6 +129,28 @@ export class SendOrderPage implements OnInit {
         DISC_AMO: 0,
       });
     }
+    details.push({
+      ITEM_CODE: -1,
+      ITEM_NAME: 'اجور توصيل',
+      QTY: 1,
+      UNIT_NAME: 'خدمة',
+      UNIT_QTY: 1,
+      STORE_CODE: this.items[0].STORE_CODE,
+      PRICE_COST: this.selectedZone?.REGION_COST,
+      PRICE: this.selectedZone?.REGION_SELL + this.paidCash,
+      PRICE_SALE_1: this.selectedZone?.REGION_SELL,
+      PRICE_SALE_2: 0,
+      totalPriceMandob: this.selectedZone?.REGION_SELL,
+      totalNetProfitMandob:
+        this.selectedZone?.REGION_SELL -
+        (this.selectedZone?.REGION_SELL + this.paidCash),
+      PRICE_SALE_3: 0,
+      ITEM_NOTE: '',
+      NOTE: '',
+      IMG_URL: '',
+      DISC_PERCENT: 0,
+      DISC_AMO: 0,
+    });
     return JSON.stringify(details);
   }
 

@@ -41,7 +41,7 @@
   <swiper-container #swiper [slidesPerView]="1" [spaceBetween]="0" [autoplay]="true" [loop]="true"
     direction="horizontal" [pagination]="{clickable:true,dynamicBullets:true}">
     <swiper-slide *ngFor="let slide of slides">
-      <img [src]="slide?.IMAGE_PATH_ONLINE" alt="">
+      <img [src]="dataService.baseUrl +'/'+ slide?.IMAGE_PATH_ONLINE" alt="">
     </swiper-slide>
     <!--
     <swiper-slide>
@@ -66,17 +66,20 @@
     </div>
   </div> -->
   <!-- <div class="container"> -->
-
+  <div class="title animate__animated animate__fadeIn">
+    <h2>أحدث المنتجات</h2>
+    <!-- <ion-button fill="clear" (click)="nav('/tabs/pages/category')">عرض الكل</ion-button> -->
+  </div>
   <div class="itemsSlide">
-    <div class="loading-slide" *ngIf="categoryProductLoading">
+    <div class="loading-slide" *ngIf="featProductLoading">
       <ion-spinner name="bubbles"></ion-spinner>
     </div>
-    <div class="loading-slide" *ngIf="categoryProductEmpty">
+    <div class="loading-slide" *ngIf="featProductEmpty">
       <p>لا يوجد منتجات بهذا القسم حاليا</p>
     </div>
     <div class="product animate__animated animate__zoomIn"
-      *ngFor="let product of categoryProducts;let i=index;trackBy:trackFn">
-      <div *ngIf="i+1 != categoryProducts.length">
+      *ngFor="let product of featProducts;let i=index;trackBy:trackFn">
+      <div *ngIf="i+1 != featProducts.length">
 
         <div class="fav">
           <ion-img (click)="toggleFav(product)"
@@ -113,7 +116,7 @@
         </div>
 
       </div>
-      <div *ngIf="i+1 === categoryProducts.length" #theLastItem>
+      <div *ngIf="i+1 === featProducts.length" #theLastItem>
 
         <div class="fav">
           <ion-img (click)="toggleFav(product)"
@@ -159,25 +162,74 @@
 
   </div>
   <div class="title animate__animated animate__fadeIn">
-    <h2>أحدث المنتجات</h2>
+    <h2>المنتجات</h2>
     <!-- <ion-button fill="clear" (click)="nav('/tabs/pages/category')">عرض الكل</ion-button> -->
   </div>
-  <!-- </div> -->
-  <div class="itemsSlide" #itemsSlide>
+  <div class="container">
+
+    <div class="offers animate__animated animate__fadeIn">
+      <div class="offer" *ngFor="let product of products;let i=index">
+        <div class="fav">
+          <ion-img (click)="toggleFav(product)"
+            [src]="product.favorite ? '../../../assets/images/home/like_act.svg' :'../../../assets/images/home/like.svg'"></ion-img>
+        </div>
+        <!-- <div class="discount">% <span>15</span>خصم</div> -->
+        <!--  -->
+        <div class="img" (click)="details(product)">
+          <img [defaultImage]="'../../../assets/shopping-loader.gif'" [lazyLoad]="product?.IMG_URL"
+            [errorImage]="'../../../assets/shopping-loader.gif'">
+        </div>
+        <div class="text">
+          <p class="name">{{product?.ITEM_NAME}}</p>
+          <div class="note">
+            <p>{{product?.ITEM_NOTE}} </p>
+          </div>
+          <div class="price">
+            <p>سعر الجملة</p>
+            <div>
+              <h2>{{product?.PRICE_SALE_1 |number }}</h2>
+              <span>دع</span>
+            </div>
+          </div>
+          <div class="price">
+            <p>سعر البيع</p>
+            <div>
+              <h2>{{product?.PRICE_SALE_2 |number }}</h2>
+              <span>دع</span>
+            </div>
+          </div>
+          <ion-button *ngIf="!product?.addedToCart" expand="block" fill="outline" (click)="addItem(product)">إضافة
+            للسلة</ion-button>
+          <div *ngIf="product?.addedToCart" class="btn">
+            <div class="ion-activatable" (click)="decrese(product)">
+              <ion-img src="../../../assets/images/low.svg"></ion-img>
+              <ion-ripple-effect type="bounded"></ion-ripple-effect>
+            </div>
+            <span>{{product?.QTY}}</span>
+            <div class="ion-activatable white" (click)="increse(product)">
+              <ion-img src="../../../assets/images/high.svg"></ion-img>
+              <ion-ripple-effect type="bounded"></ion-ripple-effect>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="itemsSlide" #itemsSlide>
     <div class="product animate__animated animate__zoomIn" *ngFor="let product of products;let i=index;trackBy:trackFn">
       <div>
 
         <div class="fav">
           <ion-img (click)="toggleFav(product)"
             [src]="product.favorite ? '../../../assets/images/home/like_act.svg' :'../../../assets/images/home/like.svg'"></ion-img>
-          <!-- <ion-img src="../../../assets/images/like_act.svg"></ion-img> -->
         </div>
         <div class="img" (click)="details(product)">
           <img [defaultImage]="'../../../assets/shopping-loader.gif'" [lazyLoad]="product?.IMG_URL"
             [errorImage]="'../../../assets/shopping-loader.gif'" />
         </div>
         <div class="text">
-          <!-- <p class="name">{{product?.ITEM_NAME}}</p> -->
           <div class="note">
             <p>{{product?.ITEM_NAME}} </p>
           </div>
@@ -199,18 +251,20 @@
             للسلة</ion-button>
           <ion-button *ngIf="product?.addedToCart" expand="block" fill="outline" disabled>مضاف للسلة</ion-button>
 
-          <!-- <ion-button *ngIf="product.addedToCart" expand="block" fill="outline" disabled>مضاف للسلة</ion-button> -->
         </div>
       </div>
 
 
     </div>
 
-  </div>
+  </div> -->
   <div *ngIf="loading" class="loading">
     <ion-spinner></ion-spinner>
   </div>
-
+  <ion-infinite-scroll threshold="25%" position="bottom" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
   <div *ngIf="errorView" class="error">
     <div class="content">
       <ion-icon name="alert-circle-outline"></ion-icon>

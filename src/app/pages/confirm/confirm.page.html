@@ -31,7 +31,7 @@
           </div>
         </div>
 
-        <ion-label>سعر الذبون</ion-label>
+        <ion-label>سعر الزبون</ion-label>
 
         <ion-item
           [class.invalid]="item.price > item.PRICE_SALE_3 || item.price < item.PRICE_SALE_2 && item.price != null"
@@ -70,10 +70,18 @@
 
     <div class="states">
       <p>تفاصيل السعر</p>
-      <div><span>سعر الزبون الاجمالي</span> <span>{{clientPrice |number}} <span>د.ع</span></span></div>
+      <div><span>سعر الزبون الاجمالي</span> <span>{{clientPrice +selected?.REGION_SELL||0 |number}}
+          <span>د.ع</span></span></div>
       <div><span>سعر الشراء الفعلي</span> <span>{{totalPrice |number}} <span>د.ع</span></span></div>
       <div><span>التوصيل</span> <span>{{selected?.REGION_SELL||0 |number}}<span>د.ع</span></span></div>
-      <div><span>الربح</span> <span>{{clientPrice -(totalPrice + selected?.REGION_SELL||0)|number}}
+      <div>
+        <span>اجور توصيل مدفوعة من التاجر</span>
+        <span style="max-width: 25%;">
+
+          <ion-input type="number" [(ngModel)]="paidCash" placeholder="....."></ion-input>
+        </span>
+      </div>
+      <div><span>الربح</span> <span>{{clientPrice -(totalPrice +paidCash||0)|number}}
           <span>د.ع</span></span></div>
     </div>
   </div>

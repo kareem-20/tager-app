@@ -20,7 +20,7 @@
         <img src="../../../assets/images/edit.svg" alt="">
       </div>
     </div>
-    <p>{{userData?.displayName ??'....'}}</p>
+    <p>{{userData?.username ??'....'}}</p>
   </div>
 
   <div class="info">
@@ -38,6 +38,14 @@
       </p>
       <p class="end">
         {{userData?.code}}
+      </p>
+    </div>
+    <div class="line">
+      <p class="start">
+        اسم صاحب الحساب
+      </p>
+      <p class="end">
+        {{userData?.displayName}}
       </p>
     </div>
     <ion-button class="ion-margin-bottom" expand="block" color="primary" fill="solid" (click)="submit()">

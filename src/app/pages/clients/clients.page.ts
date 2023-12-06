@@ -34,13 +34,32 @@ export class ClientsPage implements OnInit {
   }
 
   async deleteClient(client: any, index: number) {
-    const alert = await this.functionsService.alert({
+    const alert = await this.alertCtrl.create({
       header: 'تأكيد عملية الحذف',
-      message: 'هل تريد حذف هذا الذبون؟',
+      message: 'هل تريد حذف هذا الزبون؟',
+      mode: 'ios',
+      buttons: [
+        {
+          text: 'الغاء',
+          role: 'cancel',
+        },
+        {
+          text: 'حذف',
+          handler: () => {
+            this.dataService
+              .deleteData(`/api/receverOrder/delete/${client.T_ID}`)
+              .subscribe((res) => {
+                this.functionsService.presentToast('تم الحذف بنجاح');
+                this.getClients();
+                this.clients.splice(index, 1);
+                if (this.currentClient == client) this.currentClient = 0;
+              });
+          },
+        },
+      ],
     });
-    if (!alert) return;
-    this.clients.splice(index, 1);
-    if (this.currentClient == client) this.currentClient = 0;
+    await alert.present();
+
     console.log(this.currentClient);
   }
 
@@ -49,6 +68,14 @@ export class ClientsPage implements OnInit {
   }
   nav(path: string) {
     this.navCtrl.navigateForward(path);
+  }
+
+  editClient(client: any) {
+    this.dataService.setParams({
+      ...this.dataService.params,
+      client: client,
+    });
+    this.navCtrl.navigateForward('/add-client');
   }
 
   getClients(ev?: any) {

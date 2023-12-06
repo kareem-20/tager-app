@@ -32,8 +32,10 @@
             <span>{{client?.ADDRESS}}/{{client?.ZONE_NAME}}</span>
             <h2>{{client?.NOTE}}</h2>
           </div>
-          <!-- <ion-button (click)="deleteClient(client, i)" color="danger" fill="outline"><ion-icon
-              name="trash"></ion-icon></ion-button> -->
+          <ion-button (click)="deleteClient(client, i)" color="danger" fill="outline"><ion-icon
+              name="trash-outline"></ion-icon></ion-button>
+          <ion-button (click)="editClient(client)" color="primary" fill="outline"><ion-icon
+              name="create-outline"></ion-icon></ion-button>
         </div>
         <p (click)="choose(client)">{{client?.PHONE_1}}</p>
       </div>

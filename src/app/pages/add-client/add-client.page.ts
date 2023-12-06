@@ -16,6 +16,7 @@ export class AddClientPage implements OnInit {
   ];
   form: FormGroup;
   selectedZone: any;
+  client: any = null;
   constructor(
     private navCtrl: NavController,
     private fb: FormBuilder,
@@ -39,7 +40,12 @@ export class AddClientPage implements OnInit {
   ngOnInit() {
     // this.selectedZone = this.dataService.params.selectedZone;
   }
-
+  ionViewWillEnter() {
+    this.client = this.dataService.params.client;
+    if (this.client) {
+      this.form.patchValue(this.client);
+    }
+  }
   back() {
     this.navCtrl.pop();
   }
@@ -48,12 +54,27 @@ export class AddClientPage implements OnInit {
   }
   save() {
     let body = { ...this.form.value };
-    this.dataService
-      .postData('/api/receverOrder/insert', body)
-      .subscribe((res) => {
-        console.log(res);
-        this.functionsService.presentToast('تمت الاضافة بنجاح');
-        this.navCtrl.navigateBack('clients');
-      });
+    if (this.client) {
+      body = { ...body, T_ID: this.client.T_ID };
+
+      this.dataService
+        .editData('/api/receverOrder/update', body)
+        .subscribe((res) => {
+          console.log(res);
+          this.functionsService.presentToast('تم التعديل بنجاح');
+          this.navCtrl.navigateBack('clients');
+        });
+    } else {
+      this.dataService
+        .postData('/api/receverOrder/insert', body)
+        .subscribe((res) => {
+          console.log(res);
+          this.functionsService.presentToast('تمت الاضافة بنجاح');
+          this.navCtrl.navigateBack('clients');
+        });
+    }
+  }
+  ngOnDestroy(): void {
+    this.dataService.setParams({ ...this.dataService.params, client: null });
   }
 }

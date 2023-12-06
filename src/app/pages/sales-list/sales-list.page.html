@@ -1,0 +1,156 @@
+<ion-header mode="ios">
+  <ion-toolbar>
+    <div (click)="back()" slot="start" class="start ion-activatable">
+      <ion-img src="../../../assets/images/back.png"></ion-img>
+      <ion-ripple-effect type="bounded"></ion-ripple-effect>
+    </div>
+    <ion-label>قائمة الطلبات</ion-label>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" pullFactor="0.8" pullMin="60" pullMax="120">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div class="container">
+    <!-- <ion-segment [(ngModel)]="SHIP_CODE" mode="ios" (ionChange)="segmentChanged($event)">
+      <ion-segment-button *ngFor="let code of shippingCodes" [value]="code?.SHIP_CODE">
+        <ion-label>{{code?.SHIP_NAME}}</ion-label>
+      </ion-segment-button>
+    </ion-segment> -->
+    <!-- <div style="display:flex;justify-content: space-between;">
+      <ion-searchbar [(ngModel)]="searchText" style="flex-basis: 70%;" mode="ios" placeholder="بحث" inputmode="text"
+        type="text" (ionChange)="onSearchChange($event)" [debounce]="250"></ion-searchbar>
+      <ion-select style="flex-basis: 30%;" mode="ios" [(ngModel)]="searchType" interface="popover" placeholder="حسب">
+        <ion-select-option value="serialSearch">السيريال</ion-select-option>
+        <ion-select-option value="modelSearch">الموديل</ion-select-option>
+      </ion-select>
+    </div> -->
+    <!-- <div style="display: flex;justify-content: space-between;" class="myHead">
+      <h2 style="margin-top:8px">عدد الاجهزة :{{count||0}}</h2>
+      <ion-select *ngIf="type==='owner'" [compareWith]="citys" mode="ios" interface="popover" placeholder="المحافظة"
+        [(ngModel)]="selectedCity" >
+        <ion-select-option *ngFor="let city of citys" [value]="city._id">{{city.name}}</ion-select-option>
+      </ion-select>
+    </div> -->
+    <!--
+    <ion-accordion-group mode="ios">
+      <ion-accordion *ngFor="let bill of bills;trackBy:trackFun" [value]="bill?.BILL_NUMBER">
+        <ion-item slot="header" lines="none">
+
+          <ion-label>
+            <p>رقم الفاتورة</p>
+            <h3>{{bill?.BILL_NUMBER}}</h3>
+          </ion-label>
+          <div class="end">
+            <ion-icon (click)="presentOptionsPopover($event,bill)" size="large"
+              name="ellipsis-horizontal-circle-outline">
+            </ion-icon>
+          </div>
+        </ion-item>
+        <div slot="content" class="body">
+
+          <ion-item>
+            <p class="start">اسم الزبون</p>
+            <p class="end" slot="end">{{bill?.CLIENT_NAME}}</p>
+          </ion-item>
+          <ion-item>
+            <p class="start">رقم الهاتف</p>
+            <p class="end" slot="end">{{bill?.CLIENT_PHONE}}</p>
+          </ion-item>
+          <ion-item>
+            <p class="start">سعر البيع</p>
+            <p class="end" slot="end">{{bill?.NET_SALES|number}}</p>
+          </ion-item>
+          <ion-item>
+            <p class="start">كلفة البيع</p>
+            <p class="end" slot="end">{{bill?.NET_SALES - bill?.TOTAL_MANDOOB_ITEM |number}}</p>
+          </ion-item>
+          <ion-item>
+            <p class="start">اجور التوصيل</p>
+            <p class="end" slot="end">{{ bill?.COST_SHIP |number }}</p>
+          </ion-item>
+        </div>
+      </ion-accordion>
+    </ion-accordion-group> -->
+    <div class="items">
+      <div class="p-item animate__animated delay1-{{i+1}}"
+        [ngClass]="i%2? 'animate__fadeInLeft' : 'animate__fadeInRight'" *ngFor="let bill of bills;let i=index">
+        <!-- <p>رقم الفاتورة</p> -->
+        <div class="item one">
+          <div class="start">رقم الفاتورة</div>
+          <div class="end">
+            <ion-button expand="block" fill="outline" (click)="delete(bill)" color="danger" shape="round">
+              <ion-icon name="trash"></ion-icon>
+            </ion-button>
+          </div>
+        </div>
+        <div class="item one">
+          <div class="start">#{{ bill?.T_ID }}</div>
+          <div class="end">{{ bill?.D_TIME |date:'d/MM/yyyy hh:mm a' }}</div>
+        </div>
+        <div class="item">
+          <div class="start">اسم الزبون</div>
+          <div class="end">{{bill?.CLIENT_NAME}}</div>
+        </div>
+        <div class="item">
+          <div class="start">رقم الهاتف</div>
+          <div class="end">{{bill?.CLIENT_PHONE}}</div>
+        </div>
+        <div class="item">
+          <div class="start">سعر البيع</div>
+          <div class="end">{{bill?.INFO?.TOTAL|number}}</div>
+        </div>
+        <!-- <div class="item">
+          <div class="start">كلفة البيع</div>
+          <div class="end">{{bill?.NET_SALES - bill?.TOTAL_MANDOOB_ITEM |number}}</div>
+        </div> -->
+        <div class="item end">
+          <div class="start">اجور التوصيل</div>
+          <div class="end color">{{bill?.INFO.deliveryCost |number}} $</div>
+        </div>
+        <ion-button expand="block" (click)="openDetails(bill)">فتح</ion-button>
+        <!-- <div class="foot"> -->
+        <!-- <ion-img src="../../../assets/imags/market/more-dot.svg"></ion-img> -->
+        <!-- </div> -->
+      </div>
+    </div>
+  </div>
+
+  <ion-popover #optionsPopover [dismissOnSelect]="true" [isOpen]="optionsOpen" (didDismiss)="optionsOpen = false"
+    mode="ios">
+    <ng-template>
+      <ion-content class="popOver">
+        <ion-list>
+          <ion-item button (click)="details()">
+            <ion-label color="dark">التفاصيل</ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-content>
+    </ng-template>
+  </ion-popover>
+
+
+
+  <div *ngIf="emptyView" class="empty">
+    <div class="content">
+      <ion-icon name="happy-outline"></ion-icon>
+      <ion-text color="medium">
+        <p>لا يوجد طلبات</p>
+      </ion-text>
+    </div>
+  </div>
+  <div *ngIf="loading" class="loading">
+    <ion-spinner></ion-spinner>
+  </div>
+
+  <div *ngIf="errorView" class="error">
+    <div class="content">
+      <ion-icon name="alert-circle-outline"></ion-icon>
+      <ion-text color="medium">
+        <p>خطأ بالشبكة يرجي المحاولة لاحقاً</p>
+      </ion-text>
+    </div>
+  </div>
+</ion-content>

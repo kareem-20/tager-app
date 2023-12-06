@@ -42,11 +42,11 @@ export class HomePage implements OnInit, AfterViewInit {
   swiper?: Swiper;
   add: any;
   /// category Products
-  categoryProducts: any[] = [];
-  skipCategoryProducts = 1;
-  categoryProductLoading: boolean = true;
-  categoryProductEmpty: boolean = false;
-  maxPageCategory: number;
+  featProducts: any[] = [];
+  skipfeatProducts = 1;
+  featProductLoading: boolean = true;
+  featProductEmpty: boolean = false;
+  maxPagefeat: number;
 
   /// Intersection Observer vars
   @ViewChildren('theLastItem', { read: ElementRef })
@@ -54,7 +54,7 @@ export class HomePage implements OnInit, AfterViewInit {
   observer: any;
   constructor(
     private navCtrl: NavController,
-    private dataService: DataService,
+    public dataService: DataService,
     private cartService: CartService,
     private functionsService: FunctionsService
   ) {}
@@ -70,6 +70,7 @@ export class HomePage implements OnInit, AfterViewInit {
       .subscribe((eventName) => {
         console.log(eventName);
         if (eventName == Events.refreshHome) {
+          this.activeCat = null;
           this.getAllData();
         }
       });
@@ -93,7 +94,7 @@ export class HomePage implements OnInit, AfterViewInit {
     this.observer = new IntersectionObserver((entries) => {
       if (
         entries[0].isIntersecting &&
-        this.maxPageCategory > this.skipCategoryProducts
+        this.maxPagefeat > this.skipfeatProducts
       ) {
         console.log('scroll More ...');
         this.loadCategoryData();
@@ -115,9 +116,7 @@ export class HomePage implements OnInit, AfterViewInit {
   }
   getAllData(ev?: any) {
     forkJoin([
-      this.dataService.getData(
-        `/api/item/get-images/?item_code=-1&type_image=-1`
-      ),
+      this.dataService.getData(`/api/item/get-images/?type_image=-1`),
       this.dataService.getData('/api/category/get'),
       this.dataService.getData(this.endPoint),
       this.dataService.getMongoData('/add'),
@@ -132,13 +131,13 @@ export class HomePage implements OnInit, AfterViewInit {
         // this.categoryProducts = res[2].data.items;
         this.add = res[3].text;
         if (
-          this.maxPageCategory > this.skipCategoryProducts ||
-          this.skipCategoryProducts == 1
+          this.maxPagefeat > this.skipfeatProducts ||
+          this.skipfeatProducts == 1
         )
           this.getCategoryProducts();
-        this.checkItemsCart(this.categoryProducts);
+        this.checkItemsCart(this.featProducts);
         this.checkItemsCart(this.products);
-        this.checkItemsFav([...this.categoryProducts, ...this.products]);
+        this.checkItemsFav([...this.featProducts, ...this.products]);
         const element = this.swiperRef.nativeElement.swiper;
         element.slideTo(0, 600);
 
@@ -152,26 +151,23 @@ export class HomePage implements OnInit, AfterViewInit {
 
   getCategoryProducts(ev?: any) {
     this.dataService.getData(this.endPointCategory).subscribe((res: any) => {
-      this.maxPageCategory = res.data.pagination.max_page;
-      this.categoryProducts =
-        this.skipCategoryProducts > 1
-          ? this.categoryProducts.concat(res.data.items)
+      this.maxPagefeat = res.data.pagination.max_page;
+      this.featProducts =
+        this.skipfeatProducts > 1
+          ? this.featProducts.concat(res.data.items)
           : res.data.items;
-      if (this.categoryProducts.length)
-        (this.categoryProductLoading = false),
-          (this.categoryProductEmpty = false);
-      else
-        (this.categoryProductEmpty = true),
-          (this.categoryProductLoading = false);
-      console.log(this.categoryProducts);
+      if (this.featProducts.length)
+        (this.featProductLoading = false), (this.featProductEmpty = false);
+      else (this.featProductEmpty = true), (this.featProductLoading = false);
+      console.log(this.featProducts);
 
       if (ev) ev.target.complete();
     });
   }
   get endPointCategory(): string {
     //'/api/item/get-paginate?page=1&is_feat=true'
-    let url = `/api/item/get-paginate?page=${this.skipCategoryProducts}`;
-    if (this.activeCat != null) url += `&cat_id=${this.activeCat}`;
+    let url = `/api/item/get-paginate?page=${this.skipfeatProducts}&is_feat=true`;
+    // if (this.activeCat != null) url += `&cat_id=${this.activeCat}`;
     return url;
   }
 
@@ -203,9 +199,11 @@ export class HomePage implements OnInit, AfterViewInit {
       this.cartService.updateCart(item);
     }
   }
-  getItems() {
+  getItems(ev?: any) {
     this.dataService.getData(this.endPoint).subscribe((res: any) => {
-      this.products = res.data.items;
+      this.products =
+        this.skip > 1 ? this.products.concat(res.data.items) : res.data.items;
+      if (ev) ev.target.complete();
     });
   }
   async ionViewWillEnter() {
@@ -233,10 +231,12 @@ export class HomePage implements OnInit, AfterViewInit {
   }
 
   get endPoint(): string {
-    let url = '/api/item/get-paginate?page=1&is_feat=true';
+    let url = '/api/item/get-paginate';
+    if (this.activeCat != null) url += `&cat_id=${this.activeCat}`;
+    if (this.skip) url += `&page=${this.skip}`;
     if (this.search_txt.trim().length)
       url += `&search_txt=${this.search_txt.trim()}`;
-    return url;
+    return url.replace('&', '?');
   }
 
   watchCart(): void {
@@ -252,7 +252,7 @@ export class HomePage implements OnInit, AfterViewInit {
   doRefresh(ev: any) {
     this.loading = true;
     this.skip = 1;
-    this.skipCategoryProducts = 1;
+    this.skipfeatProducts = 1;
 
     this.getAllData(ev);
     this.getItems();
@@ -293,20 +293,26 @@ export class HomePage implements OnInit, AfterViewInit {
 
   changeCategory(cat: any) {
     this.activeCat = cat.CATEGORY_CODE;
-    this.categoryProducts = [];
-    this.categoryProductEmpty = false;
-    this.categoryProductLoading = true;
-    this.getCategoryProducts();
-    console.log(this.categoryProducts);
+    // this.categoryProducts = [];
+    // this.categoryProductEmpty = false;
+    // this.categoryProductLoading = true;
+    // this.getCategoryProducts();
+    // console.log(this.categoryProducts);
+
+    this.products = [];
+    this.emptyView = false;
+    this.getItems();
   }
 
   async loadCategoryData() {
-    this.categoryProductLoading = true;
-    this.skipCategoryProducts += 1;
+    this.featProductLoading = true;
+    this.skipfeatProducts += 1;
     this.getCategoryProducts();
-    console.log(this.categoryProducts);
+    // console.log(this.categoryProducts);
   }
   loadData(ev) {
+    this.skip += 1;
+    this.getItems(ev);
     console.log(ev);
   }
 }

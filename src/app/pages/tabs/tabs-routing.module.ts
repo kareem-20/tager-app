@@ -49,7 +49,20 @@ const routes: Routes = [
             (m) => m.ProductsPageModule
           ),
       },
-      
+      {
+        path: 'sales-list',
+        loadChildren: () =>
+          import('../sales-list/sales-list.module').then(
+            (m) => m.SalesListPageModule
+          ),
+      },
+      {
+        path: 'count-list/:id',
+        loadChildren: () =>
+          import('../count-list/count-list.module').then(
+            (m) => m.CountListPageModule
+          ),
+      },
     ],
   },
 ];
