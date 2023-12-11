@@ -318,8 +318,8 @@ export class HomePage implements OnInit, AfterViewInit {
 
   async slideClick(item: any) {
     console.log(item);
-    await this.functionsService.showLoading();
     if (item?.ITEM_CODE) {
+      await this.functionsService.showLoading();
       this.dataService
         .getData(`/api/item/get-item-by-code/${item.ITEM_CODE}`)
         .subscribe(
