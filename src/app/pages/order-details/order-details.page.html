@@ -10,11 +10,9 @@
 </ion-header>
 
 <ion-content>
-  <div class="container">
-
+  <!-- <div class="container">
     <div class="items">
       <div class="p-item ">
-        <!-- <p>رقم الفاتورة</p> -->
         <div class="item one">
           <div class="start">
             <img src="../../../assets/Group 14183.svg" alt=""> #{{ bill?.T_ID }}
@@ -38,16 +36,10 @@
           <div class="start">العنوان</div>
           <div class="end">{{bill?.CLIENT_ADDRESS}}</div>
         </div>
-        <!-- <div class="item">
-          <div class="start">سعر البيع</div>
-          <div class="end">{{bill?.INFO?.TOTAL|number}}</div>
-        </div> -->
 
       </div>
     </div>
-
     <h2>المنتجات</h2>
-
     <div class="itemsSlide">
       <div class="product animate__animated animate__zoomIn" *ngFor="let product of items;let i=index">
 
@@ -56,7 +48,6 @@
             [errorImage]="'../../../assets/shopping-loader.gif'" />
         </div>
         <div class="text">
-          <!-- <p class="name">{{product?.ITEM_NAME}}</p> -->
           <div class="note">
             <p>{{product?.ITEM_NAME}} </p>
           </div>
@@ -71,9 +62,7 @@
         </div>
       </div>
     </div>
-
     <h2>تفاصيل الدفع</h2>
-
     <div class="items">
       <div class="p-item ">
 
@@ -98,12 +87,45 @@
           <div class="start">المطلوب</div>
           <div class="end">{{(bill?.INFO.TOTAL + bill?.INFO.DELIVERYCOST -bill?.INFO.TOTAL_DISCOUNT)|number}}</div>
         </div>
-        <!-- <div class="item">
-          <div class="start">سعر البيع</div>
-          <div class="end">{{bill?.INFO?.TOTAL|number}}</div>
-        </div> -->
+      </div>
+    </div>
+  </div> -->
+  <div class="container">
+    <h1>رقم الفاتورة # {{BILL_NUMBER}}</h1>
+    <div class="head animate__animated animate__fadeIn">
+      <div class="start">({{items.length}}) منتج</div>
+    </div>
 
+
+    <div class="items animate__animated animate__fadeIn">
+      <div class="item" *ngFor="let item of items;let i=index">
+        <div class="img"><ion-img [src]="item?.IMG_URL"></ion-img></div>
+        <div class="content">
+          <div class="text">
+            <p>{{item?.ITEM_NAME}}</p>
+            <h2>{{(item?.TOTAL_MANDOOB_ITEM + item.TOTAL) |number}}<span>د.ع</span></h2>
+            <div class="operations">
+              <!-- <div class="increase ion-activatable">
+                      <ion-img src="../../../assets/images/increase.svg"></ion-img>
+                      <ion-ripple-effect type="bounded"></ion-ripple-effect>
+                    </div> -->
+              <!-- الكميه -->
+              <div class="qty">الكميه {{item.QTY}}</div>
+
+              <!-- <div class=" decrease ion-activatable">
+                      <ion-img src="../../../assets/images/decrease.svg"></ion-img>
+                      <ion-ripple-effect type="bounded"></ion-ripple-effect>
+                    </div> -->
+            </div>
+          </div>
+          <!-- <div class="delete ion-activatable" *ngIf="item.ITEM_CODE != -1" (click)="return(item)">
+              <ion-img src="../../../assets/images/delete.png"></ion-img>
+              <p>استرجاع</p>
+              <ion-ripple-effect type="bounded"></ion-ripple-effect>
+            </div> -->
+        </div>
       </div>
     </div>
   </div>
+
 </ion-content>

@@ -1,4 +1,4 @@
-// @import "../../../global.scss";
+@import "../../../../shared/mixins.scss";
 ion-header {
   ion-toolbar {
     ion-label {
@@ -10,43 +10,6 @@ ion-header {
     }
   }
 }
-
-// h1 {
-//   text-align: center;
-//   font-weight: bold;
-//   font-size: 28px;
-// }
-// table {
-//   // font-family: arial, sans-serif;
-//   border-collapse: collapse;
-//   width: 100%;
-//   color: var(--dark-text);
-// }
-
-// td,
-// th {
-//   // border: 1px solid #8C969A;
-//   text-align: start;
-//   // text-align: left;
-//   color: var(--dark-text);
-//   padding: 8px;
-// }
-
-// tr:nth-child(even) {
-//   background-color: #f3f4f5;
-// }
-// td {
-//   font-size: 12px;
-// }
-// .myFooter {
-//   padding: 20px 20px 40px;
-//   text-align: center;
-//   h3 {
-//     font-size: 28px;
-//     font-weight: bold;
-//   }
-// }
-@import "../../../../shared/mixins.scss";
 ion-header {
   ion-toolbar {
     ion-label {

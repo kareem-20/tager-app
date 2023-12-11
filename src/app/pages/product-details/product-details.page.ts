@@ -67,7 +67,6 @@ export class ProductDetailsPage implements OnInit {
         this.photos = res.data;
         setTimeout(() => {
           const element = this.swiperRef.nativeElement.swiper;
-
           element.slideTo(1, 600);
           element?.update();
         }, 1000);

@@ -60,20 +60,26 @@
     <div class="methods">
 
       <div *ngFor="let item of shiping" [class.active]="selected?.REGION_CODE == item?.REGION_CODE">
-        <div (click)="selected = item">
+        <div (click)="selected = item;deliveryCost=item?.REGION_SELL">
           <h2>{{item?.REGION_NAME}}</h2>
           <p> {{item?.REGION_SELL |number}} د.ع</p>
         </div>
       </div>
 
     </div>
-
+    <ion-item *ngIf="selected">
+      <ion-label>اجور التوصيل</ion-label>
+      <ion-input [(ngModel)]="deliveryCost" type="number" (ngModelChange)="chcekDeliveryCost()"
+        [min]="selected?.REGION_SELL"></ion-input>
+    </ion-item>
+    <ion-text *ngIf="deliveryCost< selected?.REGION_SELL" color="danger">يجب ان يكون اكبر من
+      {{selected.REGION_SELL}}</ion-text>
     <div class="states">
       <p>تفاصيل السعر</p>
-      <div><span>سعر الزبون الاجمالي</span> <span>{{clientPrice +selected?.REGION_SELL||0 |number}}
+      <div><span>سعر الزبون الاجمالي</span> <span>{{clientPrice +deliveryCost||0 |number}}
           <span>د.ع</span></span></div>
       <div><span>سعر الشراء الفعلي</span> <span>{{totalPrice |number}} <span>د.ع</span></span></div>
-      <div><span>التوصيل</span> <span>{{selected?.REGION_SELL||0 |number}}<span>د.ع</span></span></div>
+      <div><span>التوصيل</span> <span>{{deliveryCost||0 |number}}<span>د.ع</span></span></div>
       <div>
         <span>اجور توصيل مدفوعة من التاجر</span>
         <span style="max-width: 25%;">
@@ -81,13 +87,18 @@
           <ion-input type="number" [(ngModel)]="paidCash" placeholder="....."></ion-input>
         </span>
       </div>
-      <div><span>الربح</span> <span>{{clientPrice -(totalPrice +paidCash||0)|number}}
-          <span>د.ع</span></span></div>
+      <div>
+        <span>الربح</span>
+        <span>{{clientPrice -(totalPrice +paidCash||0)|number}}
+          <span>د.ع</span>
+        </span>
+      </div>
     </div>
   </div>
 
   <ion-footer class="animate__animated animate__fadeIn">
-    <ion-button (click)="confirm()" [disabled]="disable ||! selected" expand="block">إستمر</ion-button>
+    <ion-button (click)="confirm()" [disabled]="disable ||! selected ||this.deliveryCost< this.selected?.REGION_SELL"
+      expand="block">إستمر</ion-button>
   </ion-footer>
 
 </ion-content>

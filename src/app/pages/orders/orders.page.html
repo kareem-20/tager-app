@@ -13,60 +13,61 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <ion-segment mode="ios" [ngModel]="orderStatus" (ionChange)="change($event)">
-    <ion-segment-button [value]="0">
+    <!-- <ion-segment-button [value]="0">
       <ion-label>انتظار</ion-label>
-    </ion-segment-button>
+    </ion-segment-button> -->
     <ion-segment-button [value]="1">
       <ion-label>قبول</ion-label>
     </ion-segment-button>
     <ion-segment-button [value]="2">
-      <ion-label>رفض</ion-label>
+      <ion-label>تم التوصيل</ion-label>
     </ion-segment-button>
     <ion-segment-button [value]="3">
-      <ion-label>ارجاع</ion-label>
+      <ion-label>راجع</ion-label>
     </ion-segment-button>
-    <ion-segment-button [value]="4">
-      <ion-label>استبدال</ion-label>
-    </ion-segment-button>
+
   </ion-segment>
   <div class="container">
 
 
     <div class="items">
+
       <div class="p-item animate__animated delay1-{{i+1}}"
         [ngClass]="i%2? 'animate__fadeInLeft' : 'animate__fadeInRight'" *ngFor="let bill of bills;let i=index">
-        <!-- <p>رقم الفاتورة</p> -->
+        <p>رقم الفاتورة</p>
+        <!-- <div class="end">
+                <ion-button expand="block" fill="outline" (click)="delete(bill)" color="danger" shape="round">
+                  <ion-icon name="trash"></ion-icon>
+                </ion-button>
+              </div> -->
         <div class="item one">
-          <div class="start">#{{ bill?.T_ID }}</div>
-          <div class="end">{{ bill?.D_TIME |date:'d/MM/yyyy hh:mm a' }}</div>
+          <div class="start">#{{ bill?.BILL_NUMBER }}</div>
+          <div class="end">{{ bill?.C_DATE |date:'d/MM/yyyy hh:mm a' }}</div>
         </div>
-
         <div class="item">
           <div class="start">اسم الزبون</div>
           <div class="end">{{bill?.CLIENT_NAME}}</div>
-        </div>
-        <div class="item">
-          <div class="start">عدد المنتجات</div>
-          <div class="end">{{bill?.DETAILS.length}}</div>
         </div>
         <div class="item">
           <div class="start">رقم الهاتف</div>
           <div class="end">{{bill?.CLIENT_PHONE}}</div>
         </div>
         <div class="item">
-          <div class="start">العنوان</div>
-          <div class="end">{{bill?.CLIENT_ADDRESS}}</div>
-        </div>
-        <div class="item">
           <div class="start">سعر البيع</div>
-          <div class="end">{{bill?.INFO?.TOTAL|number}}</div>
+          <div class="end">{{bill?.NET_SALES|number}}</div>
         </div>
-        <div class="item end">
-          <div class="start">اجور التوصيل</div>
-          <div class="end color">{{bill?.INFO.DELIVERYCOST |number}}</div>
-        </div>
+        <!-- <div class="item">
+                <div class="start">كلفة البيع</div>
+                <div class="end">{{bill?.NET_SALES - bill?.TOTAL_MANDOOB_ITEM |number}}</div>
+              </div> -->
+        <!-- <div class="item end">
+                <div class="start">اجور التوصيل</div>
+                <div class="end color">{{bill?.INFO.deliveryCost |number}} $</div>
+              </div> -->
         <ion-button expand="block" (click)="details(bill)">فتح</ion-button>
-
+        <!-- <div class="foot"> -->
+        <!-- <ion-img src="../../../assets/imags/market/more-dot.svg"></ion-img> -->
+        <!-- </div> -->
       </div>
     </div>
   </div>

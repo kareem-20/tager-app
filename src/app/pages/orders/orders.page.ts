@@ -15,7 +15,9 @@ export class OrdersPage implements OnInit {
   emptyView: boolean = false;
   skip: any = 0;
   userData: any;
-  orderStatus: number = 0;
+  orderStatus: number = 1;
+  SHIP_CODE: any = 1;
+  IVC_CODE: any = null;
   constructor(
     private navCtrl: NavController,
     private authService: AuthService,
@@ -31,20 +33,8 @@ export class OrdersPage implements OnInit {
   getBills(ev?: any) {
     this.dataService.getData(this.endPoint).subscribe(
       (res: any) => {
-        console.log(res);
-        // this.count = res.count;
-
         this.bills = this.skip ? this.bills.concat(res.data) : res.data;
         this.bills.length ? this.showContentView(ev) : this.showEmptyView(ev);
-        this.bills.forEach((item: any) => (item.INFO = JSON.parse(item.INFO)));
-        this.bills.forEach(
-          (item: any) => (item.DETAILS = JSON.parse(item.DETAILS))
-        );
-
-        console.log(this.bills);
-
-        // this.disableInfinity = res?.length != 20
-        // if (ev) ev.target.complete()
       },
       (err) => {
         this.showErrorView(err);
@@ -53,17 +43,10 @@ export class OrdersPage implements OnInit {
   }
   get endPoint() {
     //
-    console.log(this.userData);
-
-    let url;
-    if (this.orderStatus == 0)
-      url = `/api/invoice/get/?MANDOOB_CODE=${this.userData.MANDOOB_CODE}`;
-    else
-      url = `/api/t_sales/get/?MANDOOB_CODE=${this.userData.MANDOOB_CODE}&SHIP_CODE=${this.orderStatus}`;
-
-    // if (this.skip) url += `&skip=${this.skip}`;
-    // url += `&is_accept=${this.orderStatus}`;
-
+    let url = `/api/sales/get`;
+    url += `?MANDOOB_CODE=${this.authService.userData.MANDOOB_CODE}`;
+    if (this.SHIP_CODE) url += `&SHIP_CODE=${this.SHIP_CODE}`;
+    if (this.IVC_CODE) url += `&IVC_CODE=${this.IVC_CODE}`;
     if (this.skip) url += `&skip=${this.skip}`;
     return url;
   }
@@ -88,12 +71,23 @@ export class OrdersPage implements OnInit {
     this.emptyView = true;
     if (ev) ev.target.complete();
   }
+
   back() {
     this.navCtrl.back();
   }
 
   change(ev) {
     this.orderStatus = ev.detail.value;
+    if (this.orderStatus == 1) {
+      this.SHIP_CODE = 1;
+      this.IVC_CODE = null;
+    } else if (this.orderStatus == 2) {
+      this.SHIP_CODE = 2;
+      this.IVC_CODE = null;
+    } else if (this.orderStatus == 3) {
+      this.SHIP_CODE = null;
+      this.IVC_CODE = 10;
+    }
     this.getBills();
   }
   details(bill) {

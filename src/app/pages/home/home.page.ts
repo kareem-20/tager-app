@@ -315,4 +315,25 @@ export class HomePage implements OnInit, AfterViewInit {
     this.getItems(ev);
     console.log(ev);
   }
+
+  async slideClick(item: any) {
+    console.log(item);
+    await this.functionsService.showLoading();
+    if (item?.ITEM_CODE) {
+      this.dataService
+        .getData(`/api/item/get-item-by-code/${item.ITEM_CODE}`)
+        .subscribe(
+          (res: any) => {
+            console.log(res);
+            this.functionsService.dismissLoading();
+            this.dataService.setParams({ prod: res.data });
+            this.navCtrl.navigateForward('/product-details');
+          },
+          (err) => {
+            console.log(err);
+            this.functionsService.dismissLoading();
+          }
+        );
+    }
+  }
 }

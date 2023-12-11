@@ -79,11 +79,12 @@ export class ConfirmPage implements OnInit {
       this.shiping = res.data;
     });
   }
+  chcekDeliveryCost() {}
   confirm() {
     this.cartService.items = this.items;
     this.cartService.totalPrice = this.totalPrice;
     this.cartService.clientPrice = this.clientPrice;
-    this.cartService.deliveryCost = this.selected?.REGION_SELL;
+    this.cartService.deliveryCost = this.deliveryCost;
     this.cartService.paidCash = this.paidCash;
     this.dataService.setParams({ selectedZone: this.selected });
     this.navCtrl.navigateForward('/clients');

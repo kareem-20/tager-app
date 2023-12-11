@@ -23,8 +23,8 @@ export class OrderDetailsPage implements OnInit {
     console.log(this.dataService.params.bill);
 
     this.BILL_NUMBER = await this.route.snapshot.params['id'];
-    this.items = await this.dataService.params.bill?.DETAILS;
-    this.bill = this.dataService.params.bill;
+    // this.items = await this.dataService.params.bill?.DETAILS;
+    // this.bill = this.dataService.params.bill;
     console.log(this.items);
 
     this.getDetails(this.BILL_NUMBER);
@@ -33,7 +33,7 @@ export class OrderDetailsPage implements OnInit {
     this.dataService
       .getData(`/api/salesDetails/get?BILL_NUMBER=${BILL_NUMBER}`)
       .subscribe((res: any) => {
-        this.BILL_NUMBER = res.data;
+        this.items = res.data;
         console.log(res);
       });
   }

@@ -1,8 +1,254 @@
+// @import "../../../../shared/mixins.scss";
+// ion-header {
+//   ion-toolbar {
+//     padding-top: 8px;
+//     .start {
+//       position: relative;
+//       overflow: hidden;
+//       color: var(--light-text);
+//       @include flex(center, center, 0);
+//       @include size(32, 32);
+//       border-radius: 50%;
+//       border: 1px solid #f3f4f5;
+//       margin-left: 16px;
+//     }
+//     ion-label {
+//       @include text(var(--dark-text), 20, "bold", 38);
+//     }
+//   }
+// }
+
+// .container {
+//   padding: 0 16px 36px;
+//   ion-segment {
+//     margin-block: 14px;
+
+//     ion-segment-button {
+//       margin: 6px 4px;
+//       font-family: "regular";
+//     }
+//   }
+// }
+// .items {
+//   margin-top: 26px;
+//   .p-item {
+//     margin-bottom: 10px;
+//     padding-bottom: 16px;
+//     &:not(:last-child) {
+//       border-bottom: 1px solid rgba(234, 236, 237, 1);
+//     }
+//     p {
+//       padding-inline-start: 16px;
+//       @include text(rgba(52, 74, 83, 1), 16, "regular", 27);
+//     }
+//     .item {
+//       padding: 12px 16px;
+//       &:not(&.end) {
+//         border-bottom: 1px solid rgba(234, 236, 237, 1);
+//       }
+//       display: flex;
+//       align-items: center;
+//       justify-content: space-between;
+//       .start {
+//         font-size: 14px;
+//         margin: 0;
+//         line-height: 27px;
+//         color: rgba(52, 74, 83, 1);
+//         font-family: "regular";
+
+//         display: flex;
+//         align-items: center;
+//         justify-content: center;
+//         gap: 8px;
+//       }
+//       .end {
+//         line-height: 27px;
+//         font-family: "bold";
+//         font-size: 14px;
+//         margin: 0;
+//         &.color {
+//           color: var(--ion-color-primary);
+//         }
+//       }
+//       &.one {
+//         padding: 0 16px 5px;
+//         .start {
+//           @include text(var(--dark-text), 16, "bold", 31);
+//         }
+//         .end {
+//           @include text(rgba(52, 74, 83, 1), 16, "regular", 27);
+//         }
+//       }
+//     }
+//     ion-button {
+//       // width: 78%;
+//       height: 36px;
+//       --border-radius: 22px;
+//       font-size: 14px;
+//       font-family: "regular";
+//       --background: var(--ion-color-primary);
+//     }
+//     .foot {
+//       margin-top: 5px;
+//       padding-inline: 16px;
+//       display: flex;
+//       align-items: center;
+//       justify-content: space-between;
+//       ion-img {
+//         width: 36px;
+//         height: 36px;
+//       }
+//     }
+//   }
+// }
+// h2 {
+//   font-size: 20px;
+//   font-family: "bold";
+// }
+
+// .product-details {
+//   white-space: nowrap;
+//   overflow-x: scroll;
+//   display: flex;
+//   .box {
+//     padding: 10px;
+//     border: 1px solid #eee;
+//     margin-inline-end: 20px;
+//     border-radius: 12px;
+//   }
+// }
+// .itemsSlide {
+//   overflow-y: scroll;
+//   white-space: nowrap;
+//   padding-inline-start: 16px;
+//   padding-inline-end: 4px;
+//   padding-bottom: 30px;
+//   .product {
+//     position: relative;
+//     display: inline-block;
+//     margin-left: 12px;
+//     border: 1px solid #f3f4f5;
+//     border-radius: 8px;
+//     // @include size(156, 275);
+//     // height: 300px;
+//     width: 156px;
+//     padding: 3px 8px 0;
+//     .img {
+//       height: 110px;
+//       img {
+//         width: 100%;
+//         height: 100%;
+//         object-fit: contain;
+//       }
+//       margin-bottom: 8px;
+//     }
+//     .text {
+//       .note {
+//         height: 44px;
+//       }
+//       .note p {
+//         // @include text(var(--dark-text), 12, "regular", 22);
+//         display: -webkit-box;
+//         -webkit-line-clamp: 2;
+//         -webkit-box-orient: vertical;
+//         white-space: break-spaces;
+//         overflow: hidden;
+//         min-height: 23px;
+//         font-size: 12px;
+//         // font-family: "bold";
+//       }
+//       .name {
+//         font-family: "bold";
+//         margin: 0;
+//         font-size: 14px;
+//       }
+
+//       .price {
+//         // @include flex(flex-start, center, 4);
+//         display: flex;
+//         align-items: center;
+//         justify-content: space-between;
+//         margin: 2px 0 6px;
+
+//         p {
+//           margin: 0;
+//           font-size: 12px;
+//         }
+//         div {
+//           display: flex;
+//           align-items: baseline;
+
+//           h2 {
+//             margin: 0;
+//             font-size: 16px;
+//             font-family: "bold";
+//             //   @include text(var(--dark-text), 16, "bold", 31);
+//           }
+//           span {
+//             font-size: 11px;
+//             //   @include text(var(--dark-text), 11, "regular", 21);
+//           }
+//         }
+//       }
+//     }
+//     ion-button {
+//       --border-width: 1px;
+//       --border-radius: 4px;
+//       height: 40px;
+//       font-size: 14px;
+//       font-family: "regular";
+//     }
+//     // .btn {
+//     //   height: 40px;
+//     //   @include flex(space-between, center, 0);
+//     //   div {
+//     //     color: var(--ion-color-primary);
+//     //     position: relative;
+//     //     overflow: hidden;
+//     //     border-radius: 8px;
+//     //     ion-img {
+//     //       @include size(40, 40);
+//     //     }
+//     //     &.white {
+//     //       color: rgb(244, 231, 215);
+//     //     }
+//     //   }
+//     //   span {
+//     //     @include text(var(--dark-text), 20, "bold", 38);
+//     //   }
+//     // }
+//     .fav {
+//       position: absolute;
+//       //   @include flex(center, center, 0);
+//       //   @include size(32, 32);
+//       border-radius: 50%;
+//       border: 1px solid #f3f4f5;
+//       top: 5px;
+//       left: 5px;
+//     }
+//   }
+//   &::-webkit-scrollbar {
+//     display: none;
+//   }
+// }
 @import "../../../../shared/mixins.scss";
 ion-header {
   ion-toolbar {
-    padding-top: 8px;
-    .start {
+    ion-label {
+      font-size: 20px;
+      font-family: "bold";
+      color: var(--dark-text);
+      line-height: 38px;
+      margin-right: 16px;
+    }
+  }
+}
+ion-header {
+  ion-toolbar {
+    ion-label {
+      @include text(var(--dark-text), 20, "bold", 38);
+    }
+    .end {
       position: relative;
       overflow: hidden;
       color: var(--light-text);
@@ -10,224 +256,108 @@ ion-header {
       @include size(32, 32);
       border-radius: 50%;
       border: 1px solid #f3f4f5;
-      margin-left: 16px;
-    }
-    ion-label {
-      @include text(var(--dark-text), 20, "bold", 38);
     }
   }
 }
 
 .container {
-  padding: 0 16px 36px;
-  ion-segment {
-    margin-block: 14px;
-
-    ion-segment-button {
-      margin: 6px 4px;
+  .head {
+    margin: 20px 0 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .start {
+      color: var(--dark-text);
+      font-size: 16px;
       font-family: "regular";
-    }
-  }
-}
-.items {
-  margin-top: 26px;
-  .p-item {
-    margin-bottom: 10px;
-    padding-bottom: 16px;
-    &:not(:last-child) {
-      border-bottom: 1px solid rgba(234, 236, 237, 1);
-    }
-    p {
-      padding-inline-start: 16px;
-      @include text(rgba(52, 74, 83, 1), 16, "regular", 27);
-    }
-    .item {
-      padding: 12px 16px;
-      &:not(&.end) {
-        border-bottom: 1px solid rgba(234, 236, 237, 1);
-      }
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      .start {
-        font-size: 14px;
-        margin: 0;
-        line-height: 27px;
-        color: rgba(52, 74, 83, 1);
-        font-family: "regular";
-
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-      }
-      .end {
-        line-height: 27px;
-        font-family: "bold";
-        font-size: 14px;
-        margin: 0;
-        &.color {
-          color: var(--ion-color-primary);
-        }
-      }
-      &.one {
-        padding: 0 16px 5px;
-        .start {
-          @include text(var(--dark-text), 16, "bold", 31);
-        }
-        .end {
-          @include text(rgba(52, 74, 83, 1), 16, "regular", 27);
-        }
-      }
+      line-height: 31px;
     }
     ion-button {
-      // width: 78%;
       height: 36px;
-      --border-radius: 22px;
-      font-size: 14px;
+      width: 94px;
       font-family: "regular";
-      --background: var(--ion-color-primary);
-    }
-    .foot {
-      margin-top: 5px;
-      padding-inline: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      ion-img {
-        width: 36px;
-        height: 36px;
-      }
+      --border-radius: 18px;
+      border-radius: 18px;
+      background: #ff000008;
     }
   }
 }
-h2 {
-  font-size: 20px;
-  font-family: "bold";
-}
-
-.product-details {
-  white-space: nowrap;
-  overflow-x: scroll;
-  display: flex;
-  .box {
-    padding: 10px;
-    border: 1px solid #eee;
-    margin-inline-end: 20px;
-    border-radius: 12px;
-  }
-}
-.itemsSlide {
-  overflow-y: scroll;
-  white-space: nowrap;
-  padding-inline-start: 16px;
-  padding-inline-end: 4px;
-  padding-bottom: 30px;
-  .product {
-    position: relative;
-    display: inline-block;
-    margin-left: 12px;
+/////////////////
+.items {
+  padding-bottom: 80px;
+  .item {
+    margin-bottom: 20px;
+    padding: 8px 8px 16px;
     border: 1px solid #f3f4f5;
     border-radius: 8px;
-    // @include size(156, 275);
-    // height: 300px;
-    width: 156px;
-    padding: 3px 8px 0;
+    @include flex(flex-start, flex-start, 8);
     .img {
-      height: 110px;
-      img {
+      width: 30%;
+      ion-img {
         width: 100%;
         height: 100%;
         object-fit: contain;
       }
-      margin-bottom: 8px;
     }
-    .text {
-      .note {
-        height: 44px;
-      }
-      .note p {
-        // @include text(var(--dark-text), 12, "regular", 22);
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        white-space: break-spaces;
-        overflow: hidden;
-        min-height: 23px;
-        font-size: 12px;
-        // font-family: "bold";
-      }
-      .name {
-        font-family: "bold";
-        margin: 0;
-        font-size: 14px;
-      }
-
-      .price {
-        // @include flex(flex-start, center, 4);
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin: 2px 0 6px;
-
+    .content {
+      flex: 1;
+      @include flex(space-between, flex-start, 10);
+      .text {
+        width: 81%;
         p {
-          margin: 0;
-          font-size: 12px;
+          margin: 0 0 6px;
+          @include text(var(--dark-text), 16, "regular", 22);
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+          text-overflow: ellipsis;
+          overflow: hidden;
         }
-        div {
-          display: flex;
-          align-items: baseline;
-
-          h2 {
-            margin: 0;
-            font-size: 16px;
-            font-family: "bold";
-            //   @include text(var(--dark-text), 16, "bold", 31);
-          }
+        h2 {
+          margin: 0 0 8px;
+          @include text(var(--dark-text), 20, "bold", 30);
           span {
-            font-size: 11px;
-            //   @include text(var(--dark-text), 11, "regular", 21);
+            @include text(var(--dark-text), 11, "regular", 21);
+            display: inline-block;
+            transform: translateY(-3px);
+            margin-right: 4px;
+          }
+        }
+        .operations {
+          width: 140px;
+          @include flex(space-between, center, 10);
+          .decrease,
+          .increase {
+            position: relative;
+            overflow: hidden;
+            @include size(40, 40);
+            border-radius: 6px;
+          }
+          .increase {
+            color: var(--ion-color-primary);
+          }
+          ion-img {
+            @include size(40, 40);
+          }
+          .qty {
+            @include text(var(--dark-text), 20, "bold", 38);
           }
         }
       }
+      .delete {
+        position: relative;
+        overflow: hidden;
+        border-radius: 6px;
+        padding: 2px 4px;
+        color: var(--ion-color-danger);
+        ion-img {
+          @include size(32, 32);
+        }
+        p {
+          @include text(#6f7a81, 12, "regular", 15);
+          transform: translateX(-4px);
+        }
+      }
     }
-    ion-button {
-      --border-width: 1px;
-      --border-radius: 4px;
-      height: 40px;
-      font-size: 14px;
-      font-family: "regular";
-    }
-    // .btn {
-    //   height: 40px;
-    //   @include flex(space-between, center, 0);
-    //   div {
-    //     color: var(--ion-color-primary);
-    //     position: relative;
-    //     overflow: hidden;
-    //     border-radius: 8px;
-    //     ion-img {
-    //       @include size(40, 40);
-    //     }
-    //     &.white {
-    //       color: rgb(244, 231, 215);
-    //     }
-    //   }
-    //   span {
-    //     @include text(var(--dark-text), 20, "bold", 38);
-    //   }
-    // }
-    .fav {
-      position: absolute;
-      //   @include flex(center, center, 0);
-      //   @include size(32, 32);
-      border-radius: 50%;
-      border: 1px solid #f3f4f5;
-      top: 5px;
-      left: 5px;
-    }
-  }
-  &::-webkit-scrollbar {
-    display: none;
   }
 }

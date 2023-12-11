@@ -29,7 +29,7 @@
   </ion-refresher>
 
   <div class="segmentContainer">
-    <div class="box" [class.active]="activeCat ==null" (click)="activeCat=null">
+    <div class="box" [class.active]="activeCat ==null" (click)="activeCat=null;getItems()">
       <p>الكل</p>
     </div>
     <div class="box" *ngFor="let cat of categories" [class.active]="activeCat ==cat?.CATEGORY_CODE"
@@ -40,7 +40,7 @@
   </div>
   <swiper-container #swiper [slidesPerView]="1" [spaceBetween]="0" [autoplay]="true" [loop]="true"
     direction="horizontal" [pagination]="{clickable:true,dynamicBullets:true}">
-    <swiper-slide *ngFor="let slide of slides">
+    <swiper-slide *ngFor="let slide of slides" (click)="slideClick(slide)">
       <img [src]="dataService.baseUrl +'/'+ slide?.IMAGE_PATH_ONLINE" alt="">
     </swiper-slide>
     <!--
