@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { Browser } from '@capacitor/browser';
 
 @Component({
   selector: 'app-account',
@@ -8,6 +9,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
   styleUrls: ['./account.page.scss'],
 })
 export class AccountPage implements OnInit {
+  closeBtn = false;
   constructor(
     private navCtrl: NavController,
     private authService: AuthService
@@ -21,5 +23,17 @@ export class AccountPage implements OnInit {
 
   logOut() {
     this.authService.logOut();
+  }
+  async openLink(link) {
+    // window.open(link, '_system');
+    this.closeBtn = true;
+    await Browser.open({ url: link, presentationStyle: 'popover' });
+    await Browser.addListener('browserFinished', () => {
+      this.closeBtn = false;
+    });
+  }
+  async close() {
+    this.closeBtn = false;
+    await Browser.close();
   }
 }

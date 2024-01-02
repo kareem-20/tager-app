@@ -40,6 +40,11 @@
         <ion-label>مساعدة</ion-label>
       </ion-item>
 
+      <ion-item class="animate__animated delay1-4 animate__fadeIn" lines="none" button
+        (click)="openLink('https://iraqs.net/privacy/manasaaltajer.html')">
+        <ion-img src="../../../assets/images/menu/Icon ionic-ios-help-circle-outline.svg" alt=""></ion-img>
+        <ion-label>سياسة الخصوصية</ion-label>
+      </ion-item>
 
       <ion-item class="animate__animated delay1-4 animate__fadeIn" lines="none" button (click)="nav('info')">
         <ion-img src="../../../assets/images/menu/list-ads.svg" alt=""></ion-img>
@@ -54,4 +59,10 @@
     </div>
 
   </div>
+
+  <!-- <ion-fab *ngIf="closeBtn==true" vertical="bottom" horizontal="start" slot="fixed">
+    <ion-fab-button (click)="close">
+      <ion-icon name="close"></ion-icon>
+    </ion-fab-button>
+  </ion-fab> -->
 </ion-content>
