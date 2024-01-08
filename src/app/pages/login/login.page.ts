@@ -67,4 +67,8 @@ export class LoginPage implements OnInit {
   nav(route) {
     this.navCtrl.navigateForward(route);
   }
+
+  visitor() {
+    this.authService.loginAsVisitor();
+  }
 }

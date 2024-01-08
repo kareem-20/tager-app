@@ -3,7 +3,14 @@
   max-width: 720px;
   margin: auto;
 }
-
+.visitor-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 999999;
+  border-radius: 12px;
+  --border-radius: 12px;
+}
 .logo {
   text-align: center;
 }

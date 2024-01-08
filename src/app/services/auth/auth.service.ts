@@ -202,4 +202,12 @@ export class AuthService {
       }
     );
   }
+  async loginAsVisitor() {
+    if (!this.settings.visitorCode?.length)
+      this.functionService.presentToast('غير متاح حاليا');
+    else {
+      this.loginWithBinCode({ PIN_CODE: this.settings.visitorCode });
+      this.userMongoData = await this.storage.set(MONGO_USER, 'visitor');
+    }
+  }
 }
